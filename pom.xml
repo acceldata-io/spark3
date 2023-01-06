@@ -1814,6 +1814,7 @@
           </exclusion>
         </exclusions>
       </dependency>
+      <!-- Hive 2.3 need this to init Hive's FunctionRegistry -->
       <dependency>
         <groupId>${hive.group}</groupId>
         <artifactId>hive-beeline</artifactId>
@@ -2421,10 +2422,6 @@
           <exclusion>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
           </exclusion>
           <!-- Begin of Hive 2.3 exclusion -->
           <!-- Exclude log4j-slf4j-impl, otherwise throw NCDFE when starting spark-shell -->

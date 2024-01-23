@@ -58,6 +58,19 @@
     <url>https://issues.apache.org/jira/browse/SPARK</url>
   </issueManagement>
 
+<distributionManagement>
+    <repository>
+      <id>nexus-releases</id>
+      <name>Releases</name>
+     <url>https://repo1.acceldata.dev/repository/odp-release/</url>
+   </repository>
+   <snapshotRepository>
+     <id>nexus-snapshots</id>
+     <name>Snapshot</name>
+     <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
+   </snapshotRepository>
+ </distributionManagement>
+
   <mailingLists>
     <mailingList>
       <name>Dev Mailing List</name>

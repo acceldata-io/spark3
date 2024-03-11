@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.spark</groupId>
   <artifactId>spark-parent_2.12</artifactId>
-  <version>3.2.2.3.2.2.0-2</version>
+  <version>3.2.2.3.2.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Spark Project Parent POM</name>
   <url>http://spark.apache.org/</url>
@@ -57,6 +57,19 @@
     <system>JIRA</system>
     <url>https://issues.apache.org/jira/browse/SPARK</url>
   </issueManagement>
+
+<distributionManagement>
+    <repository>
+      <id>nexus-releases</id>
+      <name>Releases</name>
+     <url>https://repo1.acceldata.dev/repository/odp-release/</url>
+   </repository>
+   <snapshotRepository>
+     <id>nexus-snapshots</id>
+     <name>Snapshot</name>
+     <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
+   </snapshotRepository>
+ </distributionManagement>
 
   <mailingLists>
     <mailingList>
@@ -120,10 +133,10 @@
     <sbt.project.name>spark</sbt.project.name>
     <slf4j.version>1.7.35</slf4j.version>
     <reload4j.version>1.2.21</reload4j.version>
-    <hadoop.version>3.2.3.3.2.2.0-2</hadoop.version>
+    <hadoop.version>3.2.3.3.2.2.0-SNAPSHOT</hadoop.version>
     <protobuf.version>2.5.0</protobuf.version>
     <yarn.version>${hadoop.version}</yarn.version>
-    <zookeeper.version>3.5.10.3.2.2.0-2</zookeeper.version>
+    <zookeeper.version>3.5.10.3.2.2.0-SNAPSHOT</zookeeper.version>
     <curator.version>2.13.0</curator.version>
     <hive.group>org.apache.hive</hive.group>
     <hive.classifier>core</hive.classifier>

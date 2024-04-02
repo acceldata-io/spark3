@@ -102,6 +102,10 @@
           <groupId>com.amazonaws</groupId>
           <artifactId>aws-java-sdk</artifactId>
         </exclusion>
+        <exclusion>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-bundle</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -278,6 +282,10 @@
               <groupId>com.google.guava</groupId>
               <artifactId>guava</artifactId>
             </exclusion>
+              <exclusion>
+                  <groupId>com.amazonaws</groupId>
+                  <artifactId>aws-java-sdk-bundle</artifactId>
+              </exclusion>
             <exclusion>
               <!--
               This is a code coverage library introduced by aliyun-java-sdk-core, only for testing

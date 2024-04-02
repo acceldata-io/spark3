@@ -70,7 +70,7 @@ public final class KerberosSaslHelper {
           underlyingTransport);
       return new TSubjectAssumingTransport(saslTransport);
     } catch (SaslException | TTransportException se) {
-      throw new IOException("Could not instantiate transport", se);
+      throw new IOException("Could not instantiate SASL transport", se);
     }
   }
 

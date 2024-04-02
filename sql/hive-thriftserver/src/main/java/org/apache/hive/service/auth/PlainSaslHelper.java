@@ -40,7 +40,7 @@ import org.apache.thrift.transport.TSaslServerTransport;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.apache.thrift.transport.TTransportFactory;
-
+import org.apache.thrift.transport.TTransportException;
 public final class PlainSaslHelper {
 
   public static TProcessorFactory getPlainProcessorFactory(ThriftCLIService service) {

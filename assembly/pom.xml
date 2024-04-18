@@ -86,12 +86,12 @@
     </dependency>
     <dependency>
       <groupId>org.apache.hudi</groupId>
-      <artifactId>hudi-spark3.2-bundle_${scala.binary.version}</artifactId>
+      <artifactId>hudi-spark3.3-bundle_${scala.binary.version}</artifactId>
       <version>${hudi.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.iceberg</groupId>
-      <artifactId>iceberg-spark-runtime-3.2_${scala.binary.version}</artifactId>
+      <artifactId>iceberg-spark-runtime-3.3_${scala.binary.version}</artifactId>
       <version>${iceberg.version}</version>
     </dependency>
 

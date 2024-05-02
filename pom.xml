@@ -1804,7 +1804,6 @@
           </exclusion>
         </exclusions>
       </dependency>
-      <!-- Hive 2.3 need this to init Hive's FunctionRegistry -->
       <dependency>
         <groupId>${hive.group}</groupId>
         <artifactId>hive-beeline</artifactId>

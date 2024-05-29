@@ -238,8 +238,7 @@
     <!--
     <netty.version>4.1.96.Final</netty.version>
     -->
-    <netty.version>4.1.74.Final</netty.version>
-
+    <netty.version>4.1.51.Final</netty.version>
     <!--
     If you are changing Arrow version specification, please check
     ./python/pyspark/sql/pandas/utils.py, and ./python/setup.py too.

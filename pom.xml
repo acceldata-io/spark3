@@ -124,7 +124,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>1.8</java.version>
+    <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.version>3.8.8</maven.version>
@@ -238,12 +238,13 @@
     <!--
     <netty.version>4.1.96.Final</netty.version>
     -->
-    <netty.version>4.1.96.Final</netty.version>
+    <netty.version>4.1.110.Final</netty.version>
+    <netty-tcnative.version>2.0.65.Final</netty-tcnative.version>
     <!--
     If you are changing Arrow version specification, please check
     ./python/pyspark/sql/pandas/utils.py, and ./python/setup.py too.
     -->
-    <arrow.version>15.0.0</arrow.version>
+    <arrow.version>16.1.0</arrow.version>
     <ammonite.version>2.5.9</ammonite.version>
 
     <!-- org.fusesource.leveldbjni will be used except on arm64 platform. -->

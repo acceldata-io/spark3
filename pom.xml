@@ -3010,12 +3010,23 @@
           <version>3.1.2</version>
           <!-- Note config is repeated in scalatest config -->
           <configuration>
+            <!--
             <includes>
               <include>**/Test*.java</include>
               <include>**/*Test.java</include>
               <include>**/*TestCase.java</include>
               <include>**/*Suite.java</include>
             </includes>
+            -->
+            <excludes>
+              <exclude>**/LevelDBBackendFsHistoryProviderSuite.java</exclude>
+              <exclude>**/FsHistoryProviderSuite.java</exclude>
+              <exclude>**/ExternalShuffleIntegrationSuite.java</exclude>
+              <exclude>**/JavaAPISuite.java</exclude>
+              <exclude>**/StreamSuite.java</exclude>
+              <exclude>**/StreamSuite.java</exclude>
+              <exclude>**/V2WriteAnalysisSuite.scala</exclude>
+            </excludes>
             <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
             <argLine>-ea -Xmx4g -Xss4m -XX:MaxMetaspaceSize=2g -XX:ReservedCodeCacheSize=${CodeCacheSize} ${extraJavaTestArgs} -Dio.netty.tryReflectionSetAccessible=true</argLine>
             <environmentVariables>

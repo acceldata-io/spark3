@@ -3019,8 +3019,8 @@
             </includes>
             -->
             <excludes>
-              <exclude>**/*Suite.java</exclude>
-              <exclude>**/*Suite.scala</exclude>
+              <exclude>**/FsHistoryProviderSuite.java</exclude>
+              <exclude>**/FsHistoryProviderSuite.scala</exclude>
             </excludes>
             <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
             <argLine>-ea -Xmx4g -Xss4m -XX:MaxMetaspaceSize=2g -XX:ReservedCodeCacheSize=${CodeCacheSize} ${extraJavaTestArgs} -Dio.netty.tryReflectionSetAccessible=true</argLine>

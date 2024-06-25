@@ -323,9 +323,7 @@ public class RpcIntegrationSuite {
 
   @Test
   public void sendRpcWithStreamOneAtATime() throws Exception {
-    //for (String stream : StreamTestHelper.STREAMS) {
-    String[] STREAMS = { "largeBuffer", "smallBuffer", "emptyBuffer"};
-    for (String stream : STREAMS ) {
+    for (String stream : StreamTestHelper.STREAMS) {
       RpcResult res = sendRpcWithStream(stream);
       assertTrue("there were error messages!" + res.errorMessages, res.errorMessages.isEmpty());
       assertEquals(Sets.newHashSet(stream), res.successMessages);

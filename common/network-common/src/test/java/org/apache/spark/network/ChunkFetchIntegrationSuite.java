@@ -210,12 +210,9 @@ public class ChunkFetchIntegrationSuite {
   @Test
   public void fetchBothChunks() throws Exception {
     FetchResult res = fetchChunks(Arrays.asList(BUFFER_CHUNK_INDEX, FILE_CHUNK_INDEX));
-    /**
-     *
     assertEquals(Sets.newHashSet(BUFFER_CHUNK_INDEX, FILE_CHUNK_INDEX), res.successChunks);
     assertTrue(res.failedChunks.isEmpty());
     assertBufferListsEqual(Arrays.asList(bufferChunk, fileChunk), res.buffers);
-     */
     res.releaseBuffers();
   }
 

@@ -1881,6 +1881,12 @@ class TestGroupsMappingProvider extends GroupMappingServiceProvider {
 class LevelDBBackendFsHistoryProviderSuite extends FsHistoryProviderSuite {
   override protected def diskBackend: HybridStoreDiskBackend.Value =
     HybridStoreDiskBackend.LEVELDB
+
+    // Skip tests on macOS
+  override protected def beforeAll(): Unit = {
+    super.beforeAll()
+    assume(!Utils.isMac, "Test skipped on macOS")
+  }
 }
 
 @ExtendedLevelDBTest

@@ -19,7 +19,6 @@ package org.apache.spark.deploy.history
 
 import java.io.File
 
-import org.junit.Assume._
 import org.mockito.AdditionalAnswers
 import org.mockito.ArgumentMatchers.{anyBoolean, anyLong, eq => meq}
 import org.mockito.Mockito.{doAnswer, spy}
@@ -230,9 +229,8 @@ abstract class HistoryServerDiskManagerSuite extends SparkFunSuite with BeforeAn
 
 @ExtendedLevelDBTest
 class HistoryServerDiskManagerUseLevelDBSuite extends HistoryServerDiskManagerSuite {
-  // Skip test if the current user is root
-  val currentUser = System.getProperty("user.name")
-  assumeFalse("Test skipped for root user", "root" == currentUser)
+  // Skip test on macOS
+  assume(!Utils.isMac, "Test skipped on macOS")
   override protected def backend: HybridStoreDiskBackend.Value = HybridStoreDiskBackend.LEVELDB
   override protected def extension: String = ".ldb"
 }

@@ -38,7 +38,6 @@ import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.ipc.{CallerContext => HadoopCallerContext}
 import org.apache.logging.log4j.Level
-import org.junit.Assume._
 
 import org.apache.spark.{SparkConf, SparkException, SparkFunSuite, TaskContext}
 import org.apache.spark.internal.config._
@@ -483,6 +482,10 @@ class UtilsSuite extends SparkFunSuite with ResetSystemProperties {
   }
 
   test("SPARK-35907: createDirectory") {
+    // Skip test if the current user is root
+    val currentUser = System.getProperty("user.name")
+    assume("root" != currentUser)
+
     val tmpDir = new File(System.getProperty("java.io.tmpdir"))
     val testDir = new File(tmpDir, "createDirectory" + System.nanoTime())
     val testDirPath = testDir.getCanonicalPath
@@ -508,9 +511,6 @@ class UtilsSuite extends SparkFunSuite with ResetSystemProperties {
     assert(Utils.createDirectory(testDirPath, "scenario3").exists())
     assert(testDir.setReadable(true))
 
-    // Skip test if the current user is root
-    val currentUser = System.getProperty("user.name")
-    assumeFalse("Test skipped for root user", "root" == currentUser)
     // 4. The parent directory cannot write
     val scenario4 = new File(testDir, "scenario4")
     assert(testDir.canWrite)

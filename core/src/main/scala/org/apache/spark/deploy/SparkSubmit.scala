@@ -1277,11 +1277,20 @@ private[spark] object SparkSubmitUtils extends Logging {
     cr.add(localIvy)
 
     // the biblio resolver resolves POM declared dependencies
+
+    val ar: IBiblioResolver = new IBiblioResolver
+    ar.setM2compatible(true)
+    ar.setUsepoms(true)
+    val defaultInternalRepo : Option[String] = sys.env.get("DEFAULT_ARTIFACT_REPOSITORY")
+    ar.setRoot(defaultInternalRepo.getOrElse("https://repo1.acceldata.dev/repository/odp-central"))
+    ar.setName("acceldata-repo")
+    cr.add(ar)
+
     val br: IBiblioResolver = new IBiblioResolver
     br.setM2compatible(true)
     br.setUsepoms(true)
-    val defaultInternalRepo : Option[String] = sys.env.get("DEFAULT_ARTIFACT_REPOSITORY")
-    br.setRoot(defaultInternalRepo.getOrElse("https://repo1.maven.org/maven2/"))
+    // val defaultInternalRepo : Option[String] = sys.env.get("DEFAULT_ARTIFACT_REPOSITORY")
+    br.setRoot(sys.env.getOrElse("DEFAULT_ARTIFACT_REPOSITORY", "https://repo1.maven.org/maven2/"))
     br.setName("central")
     cr.add(br)
 

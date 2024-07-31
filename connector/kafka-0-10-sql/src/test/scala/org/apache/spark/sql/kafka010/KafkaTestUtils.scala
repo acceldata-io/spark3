@@ -27,7 +27,7 @@ import javax.security.auth.login.Configuration
 import scala.io.Source
 import scala.jdk.CollectionConverters._
 
-import kafka.log.LogManager
+import com.google.common.io.Files
 import kafka.server.{HostedPartition, KafkaConfig, KafkaServer}
 import kafka.server.checkpoints.OffsetCheckpointFile
 import kafka.zk.KafkaZkClient
@@ -47,7 +47,6 @@ import org.apache.zookeeper.client.ZKClientConfig
 import org.apache.zookeeper.server.{NIOServerCnxnFactory, ZooKeeperServer}
 import org.apache.zookeeper.server.auth.SASLAuthenticationProvider
 import org.scalatest.Assertions._
-import org.scalatest.PrivateMethodTester
 import org.scalatest.concurrent.Eventually._
 import org.scalatest.time.SpanSugar._
 
@@ -66,7 +65,7 @@ import org.apache.spark.util.ArrayImplicits._
  */
 class KafkaTestUtils(
     withBrokerProps: Map[String, Object] = Map.empty,
-    secure: Boolean = false) extends PrivateMethodTester with Logging {
+    secure: Boolean = false) extends Logging {
 
   private val JAVA_AUTH_CONFIG = "java.security.auth.login.config"
 
@@ -448,9 +447,8 @@ class KafkaTestUtils(
     sendMessages(msgs.toImmutableArraySeq)
   }
 
-  private val cleanupLogsPrivateMethod = PrivateMethod[LogManager](Symbol("cleanupLogs"))
   def cleanupLogs(): Unit = {
-    server.logManager.invokePrivate(cleanupLogsPrivateMethod())
+    server.logManager.cleanupLogs()
   }
 
   private def getOffsets(topics: Set[String], offsetSpec: OffsetSpec): Map[TopicPartition, Long] = {

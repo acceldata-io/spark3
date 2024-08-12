@@ -241,12 +241,8 @@
 
     <!-- org.fusesource.leveldbjni will be used except on arm64 platform. -->
     <leveldbjni.group>org.fusesource.leveldbjni</leveldbjni.group>
-<<<<<<< HEAD
-    <kubernetes-client.version>6.13.1</kubernetes-client.version>
+    <kubernetes-client.version>6.13.2</kubernetes-client.version><okio.version>1.17.6</okio.version>
     <okio.version>1.17.6</okio.version>
-=======
-    <kubernetes-client.version>6.13.1</kubernetes-client.version>
->>>>>>> ac5cf7773d0 (ODP-3237: [SPARK-48801][BUILD][K8S] Upgrade `kubernetes-client` to 6.13.1)
 
     <test.java.home>${java.home}</test.java.home>
 

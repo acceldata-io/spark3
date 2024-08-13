@@ -51,7 +51,7 @@ public class ColumnVectorUtils {
    */
   public static void populate(WritableColumnVector col, InternalRow row, int fieldIdx) {
     int capacity = col.capacity;
-    DataType t` = col.dataType();
+    DataType t = col.dataType();
 
     if (row.isNullAt(fieldIdx)) {
       col.putNulls(0, capacity);

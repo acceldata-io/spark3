@@ -147,7 +147,7 @@
     <derby.version>10.14.2.0</derby.version>
     <parquet.version>1.12.2</parquet.version>
     <orc.version>1.7.8</orc.version>
-    <jetty.version>9.4.48.v20220622</jetty.version>
+    <jetty.version>9.4.53.v20231009</jetty.version>
     <jakartaservlet.version>4.0.3</jakartaservlet.version>
     <chill.version>0.10.0</chill.version>
     <ivy.version>2.5.2</ivy.version>
@@ -188,13 +188,13 @@
     <!-- for now, not running scalafmt as part of default verify pipeline -->
     <scalafmt.skip>true</scalafmt.skip>
     <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
-    <fasterxml.jackson.version>2.13.4</fasterxml.jackson.version>
-    <fasterxml.jackson.databind.version>2.13.4.2</fasterxml.jackson.databind.version>
+    <fasterxml.jackson.version>2.14.0</fasterxml.jackson.version>
+    <fasterxml.jackson.databind.version>2.14.0</fasterxml.jackson.databind.version>
     <snappy.version>1.1.9.1</snappy.version>
     <netlib.java.version>1.1.2</netlib.java.version>
     <netlib.ludovic.dev.version>2.2.1</netlib.ludovic.dev.version>
     <commons-codec.version>1.15</commons-codec.version>
-    <commons-compress.version>1.21</commons-compress.version>
+    <commons-compress.version>1.22</commons-compress.version>
     <commons-io.version>2.11.0</commons-io.version>
     <!-- org.apache.commons/commons-lang/-->
     <commons-lang2.version>2.6</commons-lang2.version>
@@ -2505,6 +2505,11 @@
             <artifactId>hive-storage-api</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>io.airlift</groupId>
+        <artifactId>aircompressor</artifactId>
+        <version>0.27</version>
       </dependency>
       <dependency>
         <groupId>org.apache.orc</groupId>

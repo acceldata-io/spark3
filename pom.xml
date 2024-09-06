@@ -2662,6 +2662,12 @@
         <groupId>com.google.crypto.tink</groupId>
         <artifactId>tink</artifactId>
         <version>${tink.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.apache.arrow</groupId>

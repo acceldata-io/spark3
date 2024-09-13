@@ -94,6 +94,12 @@
       <groupId>${hive.group}</groupId>
       <artifactId>hive-exec</artifactId>
       <classifier>${hive.classifier}</classifier>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>${hive.group}</groupId>

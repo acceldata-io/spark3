@@ -345,10 +345,6 @@
               <groupId>com.huaweicloud</groupId>
               <artifactId>esdk-obs-java</artifactId>
             </exclusion>
-            <exclusion>
-              <groupId>com.nimbusds</groupId>
-              <artifactId>nimbus-jose-jwt</artifactId>
-            </exclusion>
           </exclusions>
         </dependency>
         <dependency>

@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-parent_2.12</artifactId>
-    <version>3.3.3.3.2.3.2-2</version>
+    <version>3.3.3.3.2.3.2-201</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
@@ -52,11 +52,6 @@
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>

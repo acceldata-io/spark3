@@ -82,7 +82,7 @@
     <dependency>
       <groupId>io.delta</groupId>
       <artifactId>delta-spark_2.12</artifactId>
-      <version>3.2.0</version>
+      <version>${deltalake.version}</version>
     </dependency>
     <!--
     <dependency>
@@ -90,8 +90,8 @@
       <artifactId>hudi-spark3.5-bundle_${scala.binary.version}</artifactId>
       <version>${hudi.version}</version>
     </dependency>
-    ##<!-  Commenting out to avoid Build error "Found Banned Dependency: org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:jar:1.5.0"
-    ## ->
+    <!--  Commenting out to avoid Build error "Found Banned Dependency: org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:jar:1.5.0"
+    -->
     <dependency>
       <groupId>org.apache.iceberg</groupId>
       <artifactId>iceberg-spark-runtime-3.5_2.12</artifactId>
@@ -101,7 +101,7 @@
     <!--
       Because we don't shade dependencies anymore, we need to restore Guava to compile scope so
       that the libraries Spark depend on have it available. We'll package the version that Spark
-      uses which is not the same as Hadoop dependencies, but works.
+      uses (14.0.1) which is not the same as Hadoop dependencies, but works.
     -->
     <dependency>
       <groupId>com.google.guava</groupId>

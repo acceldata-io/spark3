@@ -81,7 +81,7 @@
     </dependency>
     <dependency>
       <groupId>io.delta</groupId>
-      <artifactId>delta-spark_2.13</artifactId>
+      <artifactId>delta-spark_2.12</artifactId>
       <version>${deltalake.version}</version>
     </dependency>
     <dependency>
@@ -93,7 +93,7 @@
     -->
     <dependency>
       <groupId>org.apache.iceberg</groupId>
-      <artifactId>iceberg-spark-runtime-3.3_${scala.binary.version}</artifactId>
+      <artifactId>iceberg-spark-runtime-3.5_2.12</artifactId>
       <version>${iceberg.version}</version>
     </dependency>
 

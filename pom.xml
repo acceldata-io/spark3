@@ -209,6 +209,7 @@
     <commons-pool2.version>2.11.1</commons-pool2.version>
     <datanucleus-core.version>4.1.17</datanucleus-core.version>
     <guava.version>33.4.0-jre</guava.version>
+    <guava.failureaccess.version>1.0.2</guava.failureaccess.version>
     <janino.version>3.1.9</janino.version>
     <!--
       Please don't upgrade the version to 3.0.0+,
@@ -614,6 +615,12 @@
         <artifactId>guava</artifactId>
         <version>${guava.version}</version>
         <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>failureaccess</artifactId>
+        <version>${guava.failureaccess.version}</version>
+        <scope>compile</scope>
       </dependency>
       <dependency>
         <groupId>org.jpmml</groupId>
@@ -3361,6 +3368,7 @@
             <includes>
               <include>org.spark-project.spark:unused</include>
               <include>com.google.guava:guava</include>
+              <include>com.google.guava:failureaccess</include>
               <include>org.jpmml:*</include>
             </includes>
           </artifactSet>

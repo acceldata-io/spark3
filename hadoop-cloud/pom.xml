@@ -39,6 +39,28 @@
   <build>
     <outputDirectory>target/scala-${scala.binary.version}/classes</outputDirectory>
     <testOutputDirectory>target/scala-${scala.binary.version}/test-classes</testOutputDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <excludes>
+                  <exclude>org.ini4j:ini4j</exclude> <!-- Exclude ini4j library -->
+                  <exclude>**/protobuf/*.java</exclude>
+                </excludes>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <dependencies>
@@ -61,11 +83,31 @@
       <artifactId>${hadoop-client-api.artifact}</artifactId>
       <version>${hadoop.version}</version>
       <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.ini4j</groupId>
+          <artifactId>ini4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.nimbusds</groupId>
+          <artifactId>nimbus-jose-jwt</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>${hadoop-client-runtime.artifact}</artifactId>
       <version>${hadoop.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.nimbusds</groupId>
+          <artifactId>nimbus-jose-jwt</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.ini4j</groupId>
+          <artifactId>ini4j</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!--
       the AWS module pulls in jackson; its transitive dependencies can create
@@ -102,6 +144,14 @@
           <groupId>com.amazonaws</groupId>
           <artifactId>aws-java-sdk</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>com.nimbusds</groupId>
+          <artifactId>nimbus-jose-jwt</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.ini4j</groupId>
+          <artifactId>ini4j</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -110,6 +160,14 @@
       <version>${hadoop.version}</version>
       <scope>${hadoop.deps.scope}</scope>
       <exclusions>
+        <exclusion>
+          <groupId>com.nimbusds</groupId>
+          <artifactId>nimbus-jose-jwt</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.ini4j</groupId>
+          <artifactId>ini4j</artifactId>
+        </exclusion>
         <exclusion>
           <groupId>org.apache.hadoop</groupId>
           <artifactId>hadoop-common</artifactId>
@@ -183,6 +241,10 @@
         <exclusion>
           <groupId>com.google.guava</groupId>
           <artifactId>guava</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.nimbusds</groupId>
+          <artifactId>nimbus-jose-jwt</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -282,6 +344,10 @@
             <exclusion>
               <groupId>com.huaweicloud</groupId>
               <artifactId>esdk-obs-java</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>com.nimbusds</groupId>
+              <artifactId>nimbus-jose-jwt</artifactId>
             </exclusion>
           </exclusions>
         </dependency>

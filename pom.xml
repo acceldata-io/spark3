@@ -2749,6 +2749,12 @@
         <artifactId>arpack</artifactId>
         <version>${netlib.ludovic.dev.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>1.33</version>
+        <scope>provided</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

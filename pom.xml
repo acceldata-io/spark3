@@ -147,7 +147,7 @@
     <derby.version>10.14.3</derby.version>
     <parquet.version>1.12.2</parquet.version>
     <orc.version>1.7.8</orc.version>
-    <jetty.version>9.4.53.v20231009</jetty.version>
+    <jetty.version>9.4.43.v20210629</jetty.version>
     <jakartaservlet.version>4.0.3</jakartaservlet.version>
     <chill.version>0.10.0</chill.version>
     <ivy.version>2.5.2</ivy.version>
@@ -196,9 +196,9 @@
     <scalafmt.validateOnly>true</scalafmt.validateOnly>
     <scalafmt.changedOnly>true</scalafmt.changedOnly>
     <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
-    <fasterxml.jackson.version>2.14.2</fasterxml.jackson.version>
-    <fasterxml.jackson.databind.version>2.14.2</fasterxml.jackson.databind.version>
-    <snappy.version>1.1.10.4</snappy.version>
+    <fasterxml.jackson.version>2.12.7</fasterxml.jackson.version>
+    <fasterxml.jackson.databind.version>2.12.7.1</fasterxml.jackson.databind.version>
+    <snappy.version>1.1.8.4</snappy.version>
     <netlib.java.version>1.1.2</netlib.java.version>
     <netlib.ludovic.dev.version>2.2.1</netlib.ludovic.dev.version>
     <commons-codec.version>1.15</commons-codec.version>
@@ -868,7 +868,7 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-all</artifactId>
-        <version>4.1.107.Final</version>
+        <version>4.1.94.Final</version>
         <exclusions>
           <exclusion>
             <groupId>io.netty</groupId>

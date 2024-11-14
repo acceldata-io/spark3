@@ -129,8 +129,22 @@ package object client {
         "org.pentaho:pentaho-aggdesigner-algorithm",
         "org.apache.hive:hive-vector-code-gen"))
 
-    val allSupportedHiveVersions =
-      Set(v12, v13, v14, v1_0, v1_1, v1_2, v2_0, v2_1, v2_2, v2_3, v3_0, v3_1)
+    case object v4_0 extends HiveVersion("4.0.1",
+      extraDeps = Seq("org.apache.hadoop:hadoop-hdfs:3.3.6",
+        "org.datanucleus:datanucleus-api-jdo:5.2.8",
+        "org.datanucleus:datanucleus-rdbms:5.2.10",
+        "org.datanucleus:javax.jdo:3.2.0-release",
+        "org.springframework:spring-core:5.3.21",
+        "org.springframework:spring-jdbc:5.3.21",
+        "org.antlr:antlr4-runtime:4.9.3",
+        "org.apache.derby:derby:10.14.2.0"),
+      exclusions = Seq("org.apache.calcite:calcite-druid",
+        "org.apache.curator:*",
+        "org.pentaho:pentaho-aggdesigner-algorithm",
+        "org.apache.hive:hive-vector-code-gen"))
+
+    val allSupportedHiveVersions: Set[HiveVersion] =
+      Set(v12, v13, v14, v1_0, v1_1, v1_2, v2_0, v2_1, v2_2, v2_3, v3_0, v3_1, v4_0)
   }
   // scalastyle:on
 

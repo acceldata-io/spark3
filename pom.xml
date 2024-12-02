@@ -208,7 +208,7 @@
     <!-- org.apache.commons/commons-pool2/-->
     <commons-pool2.version>2.11.1</commons-pool2.version>
     <datanucleus-core.version>4.1.17</datanucleus-core.version>
-    <guava.version>33.2.1-jre</guava.version>
+    <guava.version>33.3.1-jre</guava.version>
     <janino.version>3.1.9</janino.version>
     <!--
       Please don't upgrade the version to 3.0.0+,
@@ -314,6 +314,16 @@
     <spark.test.webdriver.chrome.driver></spark.test.webdriver.chrome.driver>
     <spark.test.docker.keepContainer>false</spark.test.docker.keepContainer>
     <spark.test.docker.removePulledImage>true</spark.test.docker.removePulledImage>
+
+    <!-- Version used in Connect -->
+    <connect.guava.version>33.3.1-jre</connect.guava.version>
+    <guava.failureaccess.version>1.0.2</guava.failureaccess.version>
+    <io.grpc.version>1.67.1</io.grpc.version>
+    <mima.version>1.1.4</mima.version>
+    <tomcat.annotations.api.version>6.0.53</tomcat.annotations.api.version>
+
+    <!-- Version used in Profiler -->
+    <ap-loader.version>3.0-9</ap-loader.version>
 
     <CodeCacheSize>128m</CodeCacheSize>
     <!-- Needed for consistent times -->

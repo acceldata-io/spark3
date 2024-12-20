@@ -106,7 +106,7 @@ for HADOOP_HIVE_PROFILE in "${HADOOP_HIVE_PROFILES[@]}"; do
       # For example, `orc-core/1.5.5/nohive/orc-core-1.5.5-nohive.jar`
       #                              ^^^^^^
       #                              extracted classifier
-      #               `okio/1.15.0//okio-1.15.0.jar`
+      #               `okio/1.17.6//okio-1.17.6.jar`
       #                           ^
       #                           empty for dependencies without classifier
       artifact_id=$(NF-2);

@@ -12,7 +12,7 @@
 name: "Frogbot Scan and Fix"
 on:
   workflow_dispatch:
-    branches: [ "ODP-main" ]
+    branches: [ "ODP-2817-1" ]
 permissions:
   contents: write
   pull-requests: write
@@ -34,7 +34,7 @@ jobs:
 
           # [Mandatory]
           # JFrog platform URL
-          JF_URL: JF_URL: https://trialn1ln20.jfrog.io
+          JF_URL: https://trialn1ln20.jfrog.io
 
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
           # JFrog access token with 'read' permissions on Xray service

@@ -214,6 +214,10 @@ com.googlecode.javaewah:JavaEWAH
 com.twitter:chill-java
 com.twitter:chill_2.12
 com.univocity:univocity-parsers
+io.vertx:vertx-auth-common
+io.vertx:vertx-core
+io.vertx:vertx-web-client
+io.vertx:vertx-web-common
 javax.jdo:jdo-api
 joda-time:joda-time
 net.sf.opencsv:opencsv

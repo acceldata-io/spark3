@@ -852,13 +852,11 @@
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
         <version>${protobuf.version}</version>
-        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java-util</artifactId>
         <version>${protobuf.version}</version>
-        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.roaringbitmap</groupId>

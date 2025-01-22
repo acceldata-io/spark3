@@ -35,7 +35,7 @@ else
   # We are pip installed, use the Python script to resolve a reasonable SPARK_HOME
   # Default to standard python3 interpreter unless told otherwise
   if [[ -z "$PYSPARK_DRIVER_PYTHON" ]]; then
-     PYSPARK_DRIVER_PYTHON="${PYSPARK_PYTHON:-"ambari-python-wrap"}"
+     PYSPARK_DRIVER_PYTHON="${PYSPARK_PYTHON:-"python3"}"
   fi
   export SPARK_HOME=$($PYSPARK_DRIVER_PYTHON "$FIND_SPARK_HOME_PYTHON_SCRIPT")
 fi

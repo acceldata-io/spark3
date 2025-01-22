@@ -25,7 +25,7 @@ set _SPARK_CMD_USAGE=Usage: bin\pyspark.cmd [options]
 
 rem Figure out which Python to use.
 if "x%PYSPARK_DRIVER_PYTHON%"=="x" (
-  set PYSPARK_DRIVER_PYTHON=ambari-python-wrap
+  set PYSPARK_DRIVER_PYTHON=python
   if not [%PYSPARK_PYTHON%] == [] set PYSPARK_DRIVER_PYTHON=%PYSPARK_PYTHON%
 )
 

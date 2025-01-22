@@ -560,7 +560,6 @@ object SparkParallelTestGrouping {
 
   private val testsWhichShouldRunInTheirOwnDedicatedJvm = Set(
     "org.apache.spark.DistributedSuite",
-    "org.apache.spark.scheduler.HealthTrackerIntegrationSuite",
     "org.apache.spark.sql.catalyst.expressions.DateExpressionsSuite",
     "org.apache.spark.sql.catalyst.expressions.HashExpressionsSuite",
     "org.apache.spark.sql.catalyst.expressions.CastSuite",
@@ -580,7 +579,6 @@ object SparkParallelTestGrouping {
     "org.apache.spark.sql.hive.thriftserver.ui.ThriftServerPageSuite",
     "org.apache.spark.sql.hive.thriftserver.ui.HiveThriftServer2ListenerSuite",
     "org.apache.spark.sql.kafka010.KafkaDelegationTokenSuite",
-    "org.apache.spark.sql.streaming.RocksDBStateStoreStreamingAggregationSuite",
     "org.apache.spark.shuffle.KubernetesLocalDiskShuffleDataIOSuite",
     "org.apache.spark.sql.hive.HiveScalaReflectionSuite"
   )
@@ -1399,10 +1397,8 @@ object Unidoc {
         !f.getCanonicalPath.contains("org/apache/spark/unsafe/types/CalendarInterval")))
       .map(_.filterNot(_.getCanonicalPath.contains("python")))
       .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/util/collection")))
-      .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/util/io")))
       .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/util/kvstore")))
       .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/sql/catalyst")))
-      .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/sql/connect/")))
       .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/sql/execution")))
       .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/sql/internal")))
       .map(_.filterNot(_.getCanonicalPath.contains("org/apache/spark/sql/hive")))
@@ -1552,9 +1548,7 @@ object CopyDependencies {
 
 object TestSettings {
   import BuildCommons._
-  private val defaultExcludedTags = Seq("org.apache.spark.tags.ChromeUITest",
-    "org.apache.spark.deploy.k8s.integrationtest.YuniKornTag",
-    "org.apache.spark.internal.io.cloud.IntegrationTestSuite")
+  private val defaultExcludedTags = Seq("org.apache.spark.tags.ChromeUITest")
 
   lazy val settings = Seq (
     // Fork new JVMs for tests and set Java options for those

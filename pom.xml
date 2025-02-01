@@ -235,7 +235,7 @@
     <commons-cli.version>1.5.0</commons-cli.version>
     <bouncycastle.version>1.77</bouncycastle.version>
     <tink.version>1.9.0</tink.version>
-    <netty.version>4.1.115.Final</netty.version>
+    <netty.version>4.1.117.Final</netty.version>
     <netty-tcnative.version>2.0.65.Final</netty-tcnative.version>
     <!--
     If you are changing Arrow version specification, please check
@@ -860,10 +860,6 @@
         <exclusions>
           <exclusion>
             <groupId>io.netty</groupId>
-            <artifactId>netty-codec-dns</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>io.netty</groupId>
             <artifactId>netty-codec-haproxy</artifactId>
           </exclusion>
           <exclusion>
@@ -889,10 +885,6 @@
           <exclusion>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-xml</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-resolver-dns</artifactId>
           </exclusion>
           <exclusion>
             <groupId>io.netty</groupId>

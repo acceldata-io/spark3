@@ -68,7 +68,7 @@ private[spark] object Config extends Logging {
       .internal()
       .doc("If true, use ReadWriteOnce instead of ReadWriteOncePod as persistence volume " +
         "access mode.")
-      .version("3.4.3.3.3.6.0-1")
+      .version("3.4.3.3.3.6.2-1")
       .booleanConf
       .createWithDefault(true)
 

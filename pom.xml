@@ -210,7 +210,7 @@
     <!-- org.apache.commons/commons-pool2/-->
     <commons-pool2.version>2.11.1</commons-pool2.version>
     <datanucleus-core.version>4.1.17</datanucleus-core.version>
-    <guava.version>14.0.1</guava.version>
+    <guava.version>33.4.0-jre</guava.version>
     <janino.version>3.1.9</janino.version>
     <!--
       Please don't upgrade the version to 3.0.0+,
@@ -297,8 +297,8 @@
     <spark.test.docker.removePulledImage>true</spark.test.docker.removePulledImage>
 
     <!-- Version used in Connect -->
-    <connect.guava.version>32.0.1-jre</connect.guava.version>
-    <guava.failureaccess.version>1.0.1</guava.failureaccess.version>
+    <connect.guava.version>33.4.0-jre</connect.guava.version>
+    <guava.failureaccess.version>1.0.2</guava.failureaccess.version>
     <io.grpc.version>1.56.0</io.grpc.version>
     <mima.version>1.1.2</mima.version>
     <tomcat.annotations.api.version>6.0.53</tomcat.annotations.api.version>
@@ -3300,6 +3300,7 @@
             <includes>
               <include>org.spark-project.spark:unused</include>
               <include>com.google.guava:guava</include>
+              <include>com.google.guava:failureaccess</include>
               <include>org.jpmml:*</include>
             </includes>
           </artifactSet>

@@ -161,7 +161,7 @@
     <ivy.version>2.5.2</ivy.version>
     <oro.version>2.0.8</oro.version>
     <deltalake.version>3.2.0</deltalake.version>
-    <hudi.version>0.15.1</hudi.version>
+    <hudi.version>0.15.0</hudi.version>
     <iceberg.version>1.6.0</iceberg.version>
     <!--
     If you changes codahale.metrics.version, you also need to change

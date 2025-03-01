@@ -161,7 +161,7 @@
     <ivy.version>2.5.2</ivy.version>
     <oro.version>2.0.8</oro.version>
     <deltalake.version>3.2.0</deltalake.version>
-    <hudi.version>0.15.0</hudi.version>
+    <hudi.version>0.15.2</hudi.version>
     <iceberg.version>1.7.0</iceberg.version>
     <!--
     If you changes codahale.metrics.version, you also need to change
@@ -2839,9 +2839,11 @@
                       <exclude>*:*_2.11</exclude>
                       <exclude>*:*_2.10</exclude>
                     </excludes>
+                    <!-- removing for hsbc
                     <includes>
                       <include>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:jar:1.5.0</include>
                     </includes>
+                    -->
                     <searchTransitive>true</searchTransitive>
                   </bannedDependencies>
                   <enforceBytecodeVersion>

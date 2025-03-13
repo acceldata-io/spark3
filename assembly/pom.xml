@@ -84,19 +84,20 @@
       <artifactId>delta-spark_2.12</artifactId>
       <version>${deltalake.version}</version>
     </dependency>
+    <!--
     <dependency>
       <groupId>org.apache.hudi</groupId>
       <artifactId>hudi-spark3.5-bundle_${scala.binary.version}</artifactId>
       <version>${hudi.version}</version>
     </dependency>
-    <!--  Commenting out to avoid Build error "Found Banned Dependency: org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:jar:1.5.0"
-    -->
+    ##<!-  Commenting out to avoid Build error "Found Banned Dependency: org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:jar:1.5.0"
+    ## ->
     <dependency>
       <groupId>org.apache.iceberg</groupId>
       <artifactId>iceberg-spark-runtime-3.5_2.12</artifactId>
       <version>${iceberg.version}</version>
     </dependency>
-
+    -->
     <!--
       Because we don't shade dependencies anymore, we need to restore Guava to compile scope so
       that the libraries Spark depend on have it available. We'll package the version that Spark
@@ -309,6 +310,28 @@
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-util</artifactId>
           <scope>${hadoop.deps.scope}</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <!-- Profile for Hudi -->
+    <profile>
+      <id>hudi</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.hudi</groupId>
+          <artifactId>hudi-spark3.5-bundle_${scala.binary.version}</artifactId>
+          <version>${hudi.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <!-- Profile for Iceberg -->
+    <profile>
+      <id>iceberg</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-spark-runtime-3.5_2.12</artifactId>
+          <version>${iceberg.version}</version>
         </dependency>
       </dependencies>
     </profile>

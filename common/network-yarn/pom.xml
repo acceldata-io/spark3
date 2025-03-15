@@ -83,6 +83,12 @@
       <artifactId>slf4j-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>failureaccess</artifactId>
+      <version>${guava.failureaccess.version}</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
   <build>

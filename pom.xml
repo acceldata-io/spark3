@@ -152,7 +152,7 @@
     <kafka.version>3.7.2.3.3.6.2-1</kafka.version>
     <!-- After 10.15.1.3, the minimum required version is JDK9 -->
     <derby.version>10.14.3</derby.version>
-    <parquet.version>1.13.1</parquet.version>
+    <parquet.version>1.15.2</parquet.version>
     <orc.version>1.9.5</orc.version>
     <orc.classifier>shaded-protobuf</orc.classifier>
     <jetty.version>9.4.57.v20241219</jetty.version>
@@ -2918,7 +2918,7 @@
                       <exclude>*:*_2.10</exclude>
                     </excludes>
                     <includes>
-                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_${scala.binary.version}:jar:${iceberg.version}</include>
+                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:jar:1.5.0</include>
                     </includes>
                     <searchTransitive>true</searchTransitive>
                   </bannedDependencies>

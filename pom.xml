@@ -114,7 +114,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.compiler.target>11</maven.compiler.target>
     <maven.version>3.9.6</maven.version>
     <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
     <sbt.project.name>spark</sbt.project.name>
@@ -2874,7 +2874,7 @@
                     <searchTransitive>true</searchTransitive>
                   </bannedDependencies>
                   <enforceBytecodeVersion>
-                    <maxJdkVersion>${java.version}</maxJdkVersion>
+                    <maxJdkVersion>20</maxJdkVersion>
                     <ignoredScopes>test</ignoredScopes>
                     <ignoredScopes>provided</ignoredScopes>
                     <excludes>

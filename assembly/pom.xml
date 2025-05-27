@@ -90,8 +90,8 @@
       <artifactId>hudi-spark3.5-bundle_${scala.binary.version}</artifactId>
       <version>${hudi.version}</version>
     </dependency>
-    <!--  Commenting out to avoid Build error "Found Banned Dependency: org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:jar:1.5.0"
-    -->
+    Commenting out to avoid Build error "Found Banned Dependency: org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:jar:1.5.0"
+
     <dependency>
       <groupId>org.apache.iceberg</groupId>
       <artifactId>iceberg-spark-runtime-3.5_2.12</artifactId>

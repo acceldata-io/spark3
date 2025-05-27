@@ -82,7 +82,7 @@
     <dependency>
       <groupId>io.delta</groupId>
       <artifactId>delta-spark_2.12</artifactId>
-      <version>${deltalake.version}</version>
+      <version>3.2.0</version>
     </dependency>
     <!--
     <dependency>

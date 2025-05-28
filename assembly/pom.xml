@@ -379,16 +379,48 @@
         </dependency>
       </dependencies>
     </profile>
-    <!-- Profile for Gluten -->
+    <!-- Profile for Deltalake -->
     <profile>
-      <id>gluten</id>
+      <id>deltalake</id>
       <dependencies>
         <dependency>
-          <groupId>org.apache.gluten</groupId>
-          <artifactId>gluten-velox-bundle-spark4.0_2.13-linux_amd64</artifactId>
-          <version>${gluten.version}</version>
+          <groupId>io.delta</groupId>
+          <artifactId>delta-spark_2.12</artifactId>
+          <version>${deltalake.version}</version>
+      </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>hudi</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.hudi</groupId>
+          <artifactId>hudi-spark3.5-bundle_${scala.binary.version}</artifactId>
+          <version>${hudi.version}</version>
         </dependency>
       </dependencies>
     </profile>
+    <!-- Profile for Iceberg -->
+    <profile>
+      <id>iceberg</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-spark-runtime-3.5_${scala.binary.version}</artifactId>
+          <version>${iceberg.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+      <!-- Profile for Gluten -->
+      <profile>
+          <id>gluten</id>
+          <dependencies>
+              <dependency>
+                  <groupId>org.apache.gluten</groupId>
+                  <artifactId>gluten-velox-bundle-spark4.0_2.13-linux_amd64</artifactId>
+                  <version>${gluten.version}</version>
+              </dependency>
+          </dependencies>
+      </profile>
   </profiles>
 </project>

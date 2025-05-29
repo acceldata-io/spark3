@@ -78,7 +78,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.kafka</groupId>
-      <artifactId>kafka_${scala.binary.version}</artifactId>
+      <artifactId>kafka_2.13</artifactId>
       <version>${kafka.version}</version>
       <scope>test</scope>
       <exclusions>

@@ -187,7 +187,7 @@ echo "Spark $VERSION$GITREVSTRING built for Hadoop $SPARK_HADOOP_VERSION" > "$DI
 echo "Build flags: $@" >> "$DISTDIR/RELEASE"
 
 # Copy jars
-cp "$SPARK_HOME"/assembly/target/scala*/jars/* "$DISTDIR/jars/"
+cp -r "$SPARK_HOME"/assembly/target/scala*/jars/* "$DISTDIR/jars/"
 
 # Only create the yarn directory if the yarn artifacts were built.
 if [ -f "$SPARK_HOME"/common/network-yarn/target/scala*/spark-*-yarn-shuffle.jar ]; then

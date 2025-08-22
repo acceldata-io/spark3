@@ -317,7 +317,7 @@
       <dependencies>
         <!-- Main Gluten Velox Bundle -->
         <dependency>
-          <groupId>io.glutenproject</groupId>
+          <groupId>org.apache.gluten</groupId>
           <artifactId>gluten-velox-bundle-spark3.5_${scala.binary.version}-linux_amd64</artifactId>
           <version>${gluten.version}</version>
         </dependency>

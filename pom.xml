@@ -163,6 +163,7 @@
     <deltalake.version>3.2.0</deltalake.version>
     <hudi.version>0.15.1</hudi.version>
     <iceberg.version>1.6.0</iceberg.version>
+    <gluten.version>1.4.0</gluten.version>
     <!--
     If you changes codahale.metrics.version, you also need to change
     the link to metrics.dropwizard.io in docs/monitoring.md.

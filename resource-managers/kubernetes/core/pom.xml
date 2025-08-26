@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-parent_2.12</artifactId>
-    <version>3.5.5</version>
+    <version>3.5.5.3.3.6.2-1</version>
     <relativePath>../../../pom.xml</relativePath>
   </parent>
 
@@ -41,7 +41,7 @@
       <dependencies>
         <dependency>
           <groupId>io.fabric8</groupId>
-          <artifactId>volcano-model-v1beta1</artifactId>
+          <artifactId>volcano-model</artifactId>
           <version>${kubernetes-client.version}</version>
         </dependency>
         <dependency>
@@ -75,11 +75,6 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>io.fabric8</groupId>
-      <artifactId>kubernetes-httpclient-okhttp</artifactId>
-      <version>${kubernetes-client.version}</version>
-    </dependency>
     <dependency>
       <groupId>io.fabric8</groupId>
       <artifactId>kubernetes-client</artifactId>

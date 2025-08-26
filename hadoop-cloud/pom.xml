@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-parent_2.12</artifactId>
-    <version>3.5.5</version>
+    <version>3.5.5.3.3.6.2-1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -34,6 +34,8 @@
   </description>
   <properties>
     <sbt.project.name>hadoop-cloud</sbt.project.name>
+    <okhttp.version>4.12.0</okhttp.version>
+    <okio.version>1.17.6</okio.version>
   </properties>
 
   <dependencies>
@@ -189,6 +191,16 @@
       <artifactId>jetty-util-ajax</artifactId>
       <version>${jetty.version}</version>
       <scope>${hadoop.deps.scope}</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>${okhttp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okio</groupId>
+      <artifactId>okio</artifactId>
+      <version>${okio.version}</version>
     </dependency>
   </dependencies>
 

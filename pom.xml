@@ -162,7 +162,7 @@
     <oro.version>2.0.8</oro.version>
     <deltalake.version>3.3.1</deltalake.version>
     <hudi.version>1.0.2</hudi.version>
-    <iceberg.version>1.9.0</iceberg.version>
+    <iceberg.version>1.6.1</iceberg.version>
     <!--
     If you changes codahale.metrics.version, you also need to change
     the link to metrics.dropwizard.io in docs/monitoring.md.
@@ -2917,9 +2917,6 @@
                       <exclude>*:*_2.11</exclude>
                       <exclude>*:*_2.10</exclude>
                     </excludes>
-                    <includes>
-                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:jar:1.5.0</include>
-                    </includes>
                     <searchTransitive>true</searchTransitive>
                   </bannedDependencies>
                   <enforceBytecodeVersion>
@@ -2931,6 +2928,10 @@
                         TODO(SPARK-44032): Remove the exclusion of threeten-extra when orc-core fixes the violation
                       -->
                       <exclude>org.threeten:threeten-extra</exclude>
+                      <!--
+                        TODO: exclusion of threeten-extra when orc-core fixes the violation in iceberg orc(1.7.1)
+                       -->
+                      <exclude>org.apache.iceberg:iceberg-spark-runtime-3.5_${scala.binary.version}:jar:${iceberg.version}</exclude>
                     </excludes>
                   </enforceBytecodeVersion>
                 </rules>

@@ -514,7 +514,11 @@
         <artifactId>xbean-asm9-shaded</artifactId>
         <version>4.23</version>
       </dependency>
-
+      <dependency>
+        <groupId>org.codehaus.jettison</groupId>
+        <artifactId>jettison</artifactId>
+        <version>1.5.4</version>
+      </dependency>
       <!-- Shaded deps marked as provided. These are promoted to compile scope
            in the modules where we want the shaded classes to appear in the
            associated jar. -->

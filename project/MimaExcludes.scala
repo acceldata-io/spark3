@@ -33,6 +33,16 @@ import com.typesafe.tools.mima.core.*
  */
 object MimaExcludes {
 
+  // Exclude rules for 4.2.x from 4.1.0
+  lazy val v42excludes = v41excludes ++ Seq(
+    // Add DEBUG format to ErrorMessageFormat enum
+    ProblemFilters.exclude[Problem]("org.apache.spark.ErrorMessageFormat*"),
+    // [SPARK-47086][BUILD][CORE][WEBUI] Upgrade Jetty to 12.1.4
+    ProblemFilters.exclude[MissingTypesProblem]("org.apache.spark.ui.ProxyRedirectHandler$ResponseWrapper"),
+    ProblemFilters.exclude[DirectMissingMethodProblem]("org.apache.spark.ui.ProxyRedirectHandler#ResponseWrapper.sendRedirect"),
+    ProblemFilters.exclude[IncompatibleMethTypeProblem]("org.apache.spark.ui.ProxyRedirectHandler#ResponseWrapper.this")
+  )
+
   // Exclude rules for 4.1.x from 4.0.0
   lazy val v41excludes = defaultExcludes ++ Seq(
     // [SPARK-51261][ML][CONNECT] Introduce model size estimation to control ml cache
@@ -110,6 +120,7 @@ object MimaExcludes {
   )
 
   def excludes(version: String): Seq[Problem => Boolean] = version match {
+    case v if v.startsWith("4.2") => v42excludes
     case v if v.startsWith("4.1") => v41excludes
     case _ => Seq()
   }

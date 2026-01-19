@@ -361,8 +361,11 @@ org.apache.parquet:parquet-hadoop
 org.apache.parquet:parquet-jackson
 org.apache.thrift:libfb303
 org.apache.thrift:libthrift
-org.codehaus.jackson:jackson-core-asl
-org.codehaus.jackson:jackson-mapper-asl
+org.apache.ws.xmlschema:xmlschema-core
+org.apache.xbean:xbean-asm9-shaded
+org.apache.yetus:audience-annotations
+org.apache.zookeeper:zookeeper
+org.apache.zookeeper:zookeeper-jute
 org.datanucleus:datanucleus-api-jdo
 org.datanucleus:datanucleus-core
 org.datanucleus:datanucleus-rdbms

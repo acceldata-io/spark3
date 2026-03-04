@@ -206,9 +206,15 @@
     <commons-pool2.version>2.11.1</commons-pool2.version>
     <datanucleus-core.version>4.1.17</datanucleus-core.version>
     <guava.version>14.0.1</guava.version>
-    <janino.version>3.0.16</janino.version>
-    <jersey.version>2.36</jersey.version>
-    <joda.version>2.10.13</joda.version>
+    <janino.version>3.1.9</janino.version>
+    <!-- CVE-2022-45693: force jettison 1.5.2+ (transitive deps may pull 1.1) -->
+    <jettison.version>1.5.4</jettison.version>
+    <!--
+      Please don't upgrade the version to 3.0.0+,
+      Because it transition Jakarta REST API from javax to jakarta package.
+    -->
+    <jersey.version>2.40</jersey.version>
+    <joda.version>2.12.5</joda.version>
     <jodd.version>3.5.2</jodd.version>
     <jsr305.version>3.0.0</jsr305.version>
     <libthrift.version>0.14.1</libthrift.version>
@@ -499,6 +505,12 @@
         <groupId>org.apache.xbean</groupId>
         <artifactId>xbean-asm9-shaded</artifactId>
         <version>4.20</version>
+      </dependency>
+      <!-- CVE-2022-45693: Override transitive jettison 1.1 (e.g. from Hadoop/Jersey) with safe version -->
+      <dependency>
+        <groupId>org.codehaus.jettison</groupId>
+        <artifactId>jettison</artifactId>
+        <version>${jettison.version}</version>
       </dependency>
 
       <!-- Shaded deps marked as provided. These are promoted to compile scope

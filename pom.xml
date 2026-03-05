@@ -237,6 +237,8 @@
     <!-- org.fusesource.leveldbjni will be used except on arm64 platform. -->
     <leveldbjni.group>org.fusesource.leveldbjni</leveldbjni.group>
     <kubernetes-client.version>5.12.2</kubernetes-client.version>
+    <!-- CVE-2024-24549: override transitive tomcat-embed-core from libthrift; 8.5.99+ required -->
+    <tomcat-embed.version>8.5.99</tomcat-embed.version>
 
     <test.java.home>${java.home}</test.java.home>
 
@@ -2645,6 +2647,17 @@
             <artifactId>slf4j-api</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <!-- CVE-2024-24549: override transitive tomcat-embed-core from libthrift -->
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>${tomcat-embed.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-annotations-api</artifactId>
+        <version>${tomcat-embed.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.thrift</groupId>

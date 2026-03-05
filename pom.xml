@@ -206,7 +206,7 @@
     <commons-pool2.version>2.11.1</commons-pool2.version>
     <datanucleus-core.version>4.1.17</datanucleus-core.version>
     <guava.version>14.0.1</guava.version>
-    <janino.version>3.1.9</janino.version>
+    <janino.version>3.0.16</janino.version>
     <!-- CVE-2022-45693: force jettison 1.5.2+ (transitive deps may pull 1.1) -->
     <jettison.version>1.5.4</jettison.version>
     <!-- CVE-2022-25647: force gson 2.8.9+ (hive-exec:2.3.102 pulls gson 2.2.4) -->

@@ -169,7 +169,7 @@
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-huaweicloud</artifactId>
-      <version>${hadoop.version}</version>
+      <version>3.4.2</version>
       <scope>${huaweicloud.deps.scope}</scope>
     </dependency>
     <!--

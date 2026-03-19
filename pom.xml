@@ -152,7 +152,7 @@
     <kryo.version>4.0.3</kryo.version>
     <ivy.version>2.5.3</ivy.version>
     <oro.version>2.0.8</oro.version>
-    <gluten.version>1.5.0</gluten.version>
+    <gluten.version>1.6.0</gluten.version>
     <!--
     If you change codahale.metrics.version, you also need to change
     the link to metrics.dropwizard.io in docs/monitoring.md.

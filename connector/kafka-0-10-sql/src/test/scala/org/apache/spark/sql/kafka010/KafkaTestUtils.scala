@@ -27,7 +27,7 @@ import javax.security.auth.login.Configuration
 import scala.io.Source
 import scala.jdk.CollectionConverters._
 
-import com.google.common.io.Files
+// import com.google.common.io.Files
 import kafka.server.{HostedPartition, KafkaConfig, KafkaServer}
 import kafka.server.checkpoints.OffsetCheckpointFile
 import kafka.zk.KafkaZkClient

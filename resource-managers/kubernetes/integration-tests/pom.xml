@@ -223,9 +223,9 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>software.amazon.awssdk</groupId>
-          <artifactId>bundle</artifactId>
-          <version>${aws.java.sdk.v2.version}</version>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>aws-java-sdk-bundle</artifactId>
+          <version>1.11.375</version>
           <scope>test</scope>
         </dependency>
       </dependencies>

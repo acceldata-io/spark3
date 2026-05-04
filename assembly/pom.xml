@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-parent_2.12</artifactId>
-    <version>3.5.1.3.2.3.5-2</version>
+    <version>3.5.1.3.2.3.6-2</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -90,11 +90,28 @@
       <version>${hudi.version}</version>
     </dependency>
     <!--  Commenting out to avoid Build error "Found Banned Dependency: org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:jar:1.5.0"
+    Exclude transitive avro to avoid CVE-2023-39410 (avro 1.11.1); use parent-managed avro 1.11.4 instead.
     -->
     <dependency>
       <groupId>org.apache.iceberg</groupId>
       <artifactId>iceberg-spark-runtime-3.5_2.12</artifactId>
       <version>${iceberg.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.avro</groupId>
+          <artifactId>avro</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.avro</groupId>
+          <artifactId>avro-mapred</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Force safe Avro version (CVE-2023-39410 fixed in 1.11.3+); iceberg brings 1.11.1 transitively. -->
+    <dependency>
+      <groupId>org.apache.avro</groupId>
+      <artifactId>avro</artifactId>
+      <version>${avro.version}</version>
     </dependency>
 
     <!--

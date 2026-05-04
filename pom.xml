@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.spark</groupId>
   <artifactId>spark-parent_2.12</artifactId>
-  <version>3.5.1.3.2.3.5-2</version>
+  <version>3.5.1.3.2.3.6-2</version>
   <packaging>pom</packaging>
   <name>Spark Project Parent POM</name>
   <url>https://spark.apache.org/</url>
@@ -60,7 +60,7 @@
     <snapshotRepository>
       <id>nexus-snapshots</id>
       <name>Snapshot</name>
-      <url>https://repo1.acceldata.dev/repository/odp-snapshot/</url>
+      <url>https://repo1.acceldata.dev/repository/odp-stagnig-snapshot/</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -132,14 +132,14 @@
     <sbt.project.name>spark</sbt.project.name>
     <asm.version>9.5</asm.version>
     <slf4j.version>2.0.7</slf4j.version>
-    <log4j.version>2.20.0</log4j.version>
+    <log4j.version>2.25.3</log4j.version>
     <!-- make sure to update IsolatedClientLoader whenever this version is changed -->
-    <hadoop.version>3.2.3.3.2.3.5-2</hadoop.version>
+    <hadoop.version>3.2.3.3.2.3.6-2</hadoop.version>
     <!-- SPARK-41247: When updating `protobuf.version`, also need to update `protoVersion` in `SparkBuild.scala` -->
-    <protobuf.version>3.23.4</protobuf.version>
+    <protobuf.version>3.25.5</protobuf.version>
     <protoc-jar-maven-plugin.version>3.11.4</protoc-jar-maven-plugin.version>
     <yarn.version>${hadoop.version}</yarn.version>
-    <zookeeper.version>3.5.10.3.2.3.5-2</zookeeper.version>
+    <zookeeper.version>3.5.10.3.2.3.6-2</zookeeper.version>
     <curator.version>5.2.0</curator.version>
     <hive.group>org.apache.hive</hive.group>
     <hive.classifier>core</hive.classifier>
@@ -152,16 +152,16 @@
     <kafka.version>2.8.1</kafka.version>
     <!-- After 10.15.1.3, the minimum required version is JDK9 -->
     <derby.version>10.14.3</derby.version>
-    <parquet.version>1.13.1</parquet.version>
-    <orc.version>1.9.2</orc.version>
+    <parquet.version>1.15.2</parquet.version>
+    <orc.version>1.9.5</orc.version>
     <orc.classifier>shaded-protobuf</orc.classifier>
-    <jetty.version>9.4.56.v20240826</jetty.version>
+    <jetty.version>9.4.57.v20241219</jetty.version>
     <jakartaservlet.version>4.0.3</jakartaservlet.version>
     <chill.version>0.10.0</chill.version>
     <ivy.version>2.5.2</ivy.version>
     <oro.version>2.0.8</oro.version>
     <deltalake.version>3.2.0</deltalake.version>
-    <hudi.version>0.15.1</hudi.version>
+    <hudi.version>1.1.1</hudi.version>
     <iceberg.version>1.4.3</iceberg.version>
     <!--
     If you changes codahale.metrics.version, you also need to change
@@ -169,13 +169,13 @@
     -->
     <codahale.metrics.version>4.2.19</codahale.metrics.version>
     <!-- Should be consistent with SparkBuild.scala and docs -->
-    <avro.version>1.11.4</avro.version>
+    <avro.version>1.11.5</avro.version>
     <aws.kinesis.client.version>1.12.0</aws.kinesis.client.version>
     <!-- Should be consistent with Kinesis client dependency -->
     <aws.java.sdk.version>1.11.655</aws.java.sdk.version>
     <!-- the producer is used in tests -->
     <aws.kinesis.producer.version>0.12.8</aws.kinesis.producer.version>
-    <gcs-connector.version>hadoop3-2.2.14</gcs-connector.version>
+    <gcs-connector.version>hadoop3-2.2.26</gcs-connector.version>
     <!--  org.apache.httpcomponents/httpclient-->
     <commons.httpclient.version>4.5.14</commons.httpclient.version>
     <commons.httpcore.version>4.4.16</commons.httpcore.version>
@@ -211,6 +211,14 @@
     <datanucleus-core.version>4.1.17</datanucleus-core.version>
     <guava.version>14.0.1</guava.version>
     <janino.version>3.1.9</janino.version>
+    <!-- CVE-2022-45693: force jettison 1.5.2+ (transitive deps may pull 1.1) -->
+    <jettison.version>1.5.4</jettison.version>
+    <!-- CVE-2022-25647: force gson 2.8.9+ (hive-exec:2.3.102 pulls gson 2.2.4) -->
+    <gson.version>2.8.9</gson.version>
+    <!-- CVE-2021-0341: force okhttp 4.9.2+ (kubernetes-httpclient-okhttp pulls 3.12.12; no 3.x patch) -->
+    <okhttp.version>4.9.3</okhttp.version>
+    <!-- CVE-2021-33813: force jdom2 2.0.6.1+ (XXE in SAXBuilder; transitive deps may pull 2.0.6) -->
+    <jdom2.version>2.0.6.1</jdom2.version>
     <!--
       Please don't upgrade the version to 3.0.0+,
       Because it transition Jakarta REST API from javax to jakarta package.
@@ -230,7 +238,7 @@
     <commons-cli.version>1.5.0</commons-cli.version>
     <bouncycastle.version>1.70</bouncycastle.version>
     <tink.version>1.9.0</tink.version>
-    <netty.version>4.1.108.Final</netty.version>
+    <netty.version>4.1.132.Final</netty.version>
     <!--
     If you are changing Arrow version specification, please check
     ./python/pyspark/sql/pandas/utils.py, and ./python/setup.py too.
@@ -496,6 +504,30 @@
         <groupId>org.apache.xbean</groupId>
         <artifactId>xbean-asm9-shaded</artifactId>
         <version>4.23</version>
+      </dependency>
+      <!-- CVE-2022-45693: Override transitive jettison 1.1 (e.g. from Hadoop/Jersey) with safe version -->
+      <dependency>
+        <groupId>org.codehaus.jettison</groupId>
+        <artifactId>jettison</artifactId>
+        <version>${jettison.version}</version>
+      </dependency>
+      <!-- CVE-2022-25647: Override transitive gson 2.2.4 from hive-exec with safe version -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+      <!-- CVE-2021-0341: Override transitive okhttp 3.12.12 from kubernetes-httpclient-okhttp with 4.9.2+ -->
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+        <version>${okhttp.version}</version>
+      </dependency>
+      <!-- CVE-2021-33813: Override transitive jdom2 2.0.6 with 2.0.6.1 (XXE in SAXBuilder) -->
+      <dependency>
+        <groupId>org.jdom</groupId>
+        <artifactId>jdom2</artifactId>
+        <version>${jdom2.version}</version>
       </dependency>
 
       <!-- Shaded deps marked as provided. These are promoted to compile scope
@@ -812,9 +844,9 @@
         <version>${snappy.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.lz4</groupId>
+        <groupId>at.yawk.lz4</groupId>
         <artifactId>lz4-java</artifactId>
-        <version>1.8.0</version>
+        <version>1.10.2</version>
       </dependency>
       <dependency>
         <groupId>com.github.luben</groupId>
@@ -2561,7 +2593,7 @@
       <dependency>
         <groupId>io.airlift</groupId>
         <artifactId>aircompressor</artifactId>
-        <version>0.26</version>
+        <version>2.0.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.orc</groupId>
@@ -2821,6 +2853,9 @@
                       <exclude>*:*_2.11</exclude>
                       <exclude>*:*_2.10</exclude>
                     </excludes>
+                    <includes>
+                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:jar:1.5.0</include>
+                    </includes>
                     <searchTransitive>true</searchTransitive>
                   </bannedDependencies>
                   <enforceBytecodeVersion>

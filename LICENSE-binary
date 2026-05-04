@@ -362,7 +362,7 @@ org.codehaus.jackson:jackson-mapper-asl
 org.datanucleus:datanucleus-api-jdo
 org.datanucleus:datanucleus-core
 org.datanucleus:datanucleus-rdbms
-org.lz4:lz4-java
+at.yawk.lz4:lz4-java
 org.xerial.snappy:snappy-java
 stax:stax-api
 xerces:xercesImpl

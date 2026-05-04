@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.spark</groupId>
   <artifactId>spark-parent_2.12</artifactId>
-  <version>3.3.3.3.2.3.5-2</version>
+  <version>3.3.3.3.2.3.6-2</version>
   <packaging>pom</packaging>
   <name>Spark Project Parent POM</name>
   <url>https://spark.apache.org/</url>
@@ -126,13 +126,13 @@
     <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
     <sbt.project.name>spark</sbt.project.name>
     <slf4j.version>1.7.32</slf4j.version>
-    <log4j.version>2.17.2</log4j.version>
+    <log4j.version>2.25.3</log4j.version>
     <!-- make sure to update IsolatedClientLoader whenever this version is changed -->
-    <hadoop.version>3.2.3.3.2.3.5-2</hadoop.version>
+    <hadoop.version>3.2.3.3.2.3.6-2</hadoop.version>
     <!-- SPARK-42188: When updating `protobuf.version`, also need to update `protoVersion` in `SparkBuild.scala` -->
     <protobuf.version>2.5.0</protobuf.version>
     <yarn.version>${hadoop.version}</yarn.version>
-    <zookeeper.version>3.5.10.3.2.3.5-2</zookeeper.version>
+    <zookeeper.version>3.5.10.3.2.3.6-2</zookeeper.version>
     <curator.version>2.13.0</curator.version>
     <hive.group>org.apache.hive</hive.group>
     <hive.classifier>core</hive.classifier>
@@ -147,26 +147,27 @@
     <derby.version>10.14.2.0</derby.version>
     <parquet.version>1.12.2</parquet.version>
     <orc.version>1.7.8</orc.version>
-    <jetty.version>9.4.48.v20220622</jetty.version>
+    <jetty.version>9.4.57.v20241219</jetty.version>
     <jakartaservlet.version>4.0.3</jakartaservlet.version>
     <chill.version>0.10.0</chill.version>
     <ivy.version>2.5.2</ivy.version>
     <oro.version>2.0.8</oro.version>
     <deltalake.version>2.3.0</deltalake.version>
-    <hudi.version>0.14.2</hudi.version>
-    <iceberg.version>1.5.0</iceberg.version>
+    <hudi.version>1.1.1</hudi.version>
+    <iceberg.version>1.4.3</iceberg.version>
     <!--
     If you changes codahale.metrics.version, you also need to change
     the link to metrics.dropwizard.io in docs/monitoring.md.
     -->
     <codahale.metrics.version>4.2.7</codahale.metrics.version>
     <!-- Should be consistent with SparkBuild.scala and docs -->
-    <avro.version>1.11.0</avro.version>
+    <avro.version>1.11.5</avro.version>
     <aws.kinesis.client.version>1.12.0</aws.kinesis.client.version>
     <!-- Should be consistent with Kinesis client dependency -->
     <aws.java.sdk.version>1.11.655</aws.java.sdk.version>
     <!-- the producer is used in tests -->
     <aws.kinesis.producer.version>0.12.8</aws.kinesis.producer.version>
+    <gcs-connector.version>hadoop3-2.2.26</gcs-connector.version>
     <!--  org.apache.httpcomponents/httpclient-->
     <commons.httpclient.version>4.5.13</commons.httpclient.version>
     <commons.httpcore.version>4.4.14</commons.httpcore.version>
@@ -190,7 +191,7 @@
     <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
     <fasterxml.jackson.version>2.17.2</fasterxml.jackson.version>
     <fasterxml.jackson.databind.version>2.17.2</fasterxml.jackson.databind.version>
-    <snappy.version>1.1.8.4</snappy.version>
+    <snappy.version>1.1.10.4</snappy.version>
     <netlib.java.version>1.1.2</netlib.java.version>
     <netlib.ludovic.dev.version>2.2.1</netlib.ludovic.dev.version>
     <commons-codec.version>1.15</commons-codec.version>
@@ -205,8 +206,18 @@
     <datanucleus-core.version>4.1.17</datanucleus-core.version>
     <guava.version>14.0.1</guava.version>
     <janino.version>3.0.16</janino.version>
-    <jersey.version>2.36</jersey.version>
-    <joda.version>2.10.13</joda.version>
+    <!-- CVE-2022-45693: force jettison 1.5.2+ (transitive deps may pull 1.1) -->
+    <jettison.version>1.5.4</jettison.version>
+    <!-- CVE-2022-25647: force gson 2.8.9+ (hive-exec:2.3.102 pulls gson 2.2.4) -->
+    <gson.version>2.8.9</gson.version>
+    <!-- CVE-2021-0341: force okhttp 4.9.2+ (kubernetes-httpclient-okhttp pulls 3.12.12; no 3.x patch) -->
+    <okhttp.version>4.9.3</okhttp.version>
+    <!--
+      Please don't upgrade the version to 3.0.0+,
+      Because it transition Jakarta REST API from javax to jakarta package.
+    -->
+    <jersey.version>2.40</jersey.version>
+    <joda.version>2.12.5</joda.version>
     <jodd.version>3.5.2</jodd.version>
     <jsr305.version>3.0.0</jsr305.version>
     <libthrift.version>0.14.1</libthrift.version>
@@ -217,8 +228,9 @@
     <maven-antrun.version>1.8</maven-antrun.version>
     <commons-crypto.version>1.1.0</commons-crypto.version>
     <commons-cli.version>1.5.0</commons-cli.version>
-    <bouncycastle.version>1.60</bouncycastle.version>
-    <tink.version>1.6.1</tink.version>
+    <bouncycastle.version>1.70</bouncycastle.version>
+    <tink.version>1.9.0</tink.version>
+    <netty.version>4.1.132.Final</netty.version>
     <!--
     If you are changing Arrow version specification, please check
     ./python/pyspark/sql/pandas/utils.py, and ./python/setup.py too.
@@ -227,6 +239,8 @@
     <!-- org.fusesource.leveldbjni will be used except on arm64 platform. -->
     <leveldbjni.group>org.fusesource.leveldbjni</leveldbjni.group>
     <kubernetes-client.version>5.12.2</kubernetes-client.version>
+    <!-- CVE-2024-24549: override transitive tomcat-embed-core from libthrift; 8.5.99+ required -->
+    <tomcat-embed.version>8.5.99</tomcat-embed.version>
 
     <test.java.home>${java.home}</test.java.home>
 
@@ -496,6 +510,24 @@
         <groupId>org.apache.xbean</groupId>
         <artifactId>xbean-asm9-shaded</artifactId>
         <version>4.20</version>
+      </dependency>
+      <!-- CVE-2022-45693: Override transitive jettison 1.1 (e.g. from Hadoop/Jersey) with safe version -->
+      <dependency>
+        <groupId>org.codehaus.jettison</groupId>
+        <artifactId>jettison</artifactId>
+        <version>${jettison.version}</version>
+      </dependency>
+      <!-- CVE-2022-25647: Override transitive gson 2.2.4 from hive-exec with safe version -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+      <!-- CVE-2021-0341: Override transitive okhttp 3.12.12 from kubernetes-httpclient-okhttp with 4.9.2+ -->
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+        <version>${okhttp.version}</version>
       </dependency>
 
       <!-- Shaded deps marked as provided. These are promoted to compile scope
@@ -810,9 +842,9 @@
         <version>${snappy.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.lz4</groupId>
+        <groupId>at.yawk.lz4</groupId>
         <artifactId>lz4-java</artifactId>
-        <version>1.8.0</version>
+        <version>1.10.2</version>
       </dependency>
       <dependency>
         <groupId>com.github.luben</groupId>
@@ -2507,6 +2539,11 @@
         </exclusions>
       </dependency>
       <dependency>
+        <groupId>io.airlift</groupId>
+        <artifactId>aircompressor</artifactId>
+        <version>2.0.2</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.orc</groupId>
         <artifactId>orc-mapreduce</artifactId>
         <version>${orc.version}</version>
@@ -2618,6 +2655,17 @@
             <artifactId>slf4j-api</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <!-- CVE-2024-24549: override transitive tomcat-embed-core from libthrift -->
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>${tomcat-embed.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-annotations-api</artifactId>
+        <version>${tomcat-embed.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.thrift</groupId>

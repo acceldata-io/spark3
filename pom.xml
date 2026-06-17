@@ -128,6 +128,7 @@
   </modules>
 
   <properties>
+    <odp.release.version>3.3.6.5-SNAPSHOT</odp.release.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version>
@@ -140,18 +141,18 @@
     <slf4j.version>2.0.17</slf4j.version>
     <log4j.version>2.25.3</log4j.version>
     <!-- make sure to update IsolatedClientLoader whenever this version is changed -->
-    <hadoop.version>3.3.6.3.3.6.5-SNAPSHOT</hadoop.version>
+    <hadoop.version>3.3.6.${odp.release.version}</hadoop.version>
     <!-- SPARK-41247: When updating `protobuf.version`, also need to update `protoVersion` in `SparkBuild.scala` -->
     <protobuf.version>4.33.0</protobuf.version>
     <protoc-jar-maven-plugin.version>3.11.4</protoc-jar-maven-plugin.version>
-    <zookeeper.version>3.8.4.3.3.6.5-SNAPSHOT</zookeeper.version>
+    <zookeeper.version>3.8.4.${odp.release.version}</zookeeper.version>
     <curator.version>5.9.0</curator.version>
     <hive.group>org.apache.hive</hive.group>
     <hive.classifier>core</hive.classifier>
     <!-- Version used in Maven Hive dependency -->
     <hive.version>2.3.10</hive.version>
     <!-- note that this should be compatible with Kafka brokers version 0.10 and up -->
-    <kafka.version>3.7.2.3.3.6.5-SNAPSHOT</kafka.version>
+    <kafka.version>3.7.2.${odp.release.version}</kafka.version>
     <!-- After 10.17.1.0, the minimum required version is JDK19 -->
     <derby.version>10.16.1.1</derby.version>
     <parquet.version>1.16.0</parquet.version>

@@ -154,7 +154,7 @@
     <oro.version>2.0.8</oro.version>
     <deltalake.version>2.3.0</deltalake.version>
     <hudi.version>1.1.1</hudi.version>
-    <iceberg.version>1.4.3</iceberg.version>
+    <iceberg.version>1.6.1</iceberg.version>
     <!--
     If you changes codahale.metrics.version, you also need to change
     the link to metrics.dropwizard.io in docs/monitoring.md.

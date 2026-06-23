@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-parent_2.12</artifactId>
-    <version>3.5.1.3.2.3.6-2</version>
+    <version>3.5.1.3.2.3.6-3000</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -33,7 +33,7 @@
   <properties>
     <sbt.project.name>core</sbt.project.name>
   </properties>
-  
+
   <dependencies>
     <!-- #if scala-2.13 --><!--
     <dependency>

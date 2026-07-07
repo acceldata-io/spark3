@@ -2890,6 +2890,11 @@
         <artifactId>okio</artifactId>
         <version>${okio.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.wildfly.openssl</groupId>
+        <artifactId>wildfly-openssl</artifactId>
+        <version>2.2.5.Final</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

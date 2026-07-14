@@ -80,6 +80,28 @@
         <version>${project.version}</version>
     </dependency>
     <!--
+      OCR-2525: bundle the Kafka 0.10 DStream connector into the distribution jars/ folder so
+      spark-submit jobs find org.apache.spark.streaming.kafka010.* out-of-the-box, as CDP shipped it.
+      The connector is an external module (not on the assembly path upstream) and was therefore
+      absent from the ODP runtime.
+    -->
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming-kafka-0-10_${scala.binary.version}</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+    <!--
+      OCR-2525: bundle kafka-clients explicitly so the connector's runtime dependency is in jars/
+      and the distribution is self-contained (as CDP's was). Version is driven by the shared
+      kafka.version property (see the root pom.xml), which the connector module also uses.
+    -->
+    <dependency>
+        <groupId>org.apache.kafka</groupId>
+        <artifactId>kafka-clients</artifactId>
+        <version>${kafka.version}</version>
+    </dependency>
+
+    <!--
     <dependency>
       <groupId>org.apache.hudi</groupId>
       <artifactId>hudi-spark3.5-bundle_${scala.binary.version}</artifactId>

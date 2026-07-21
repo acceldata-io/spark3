@@ -411,6 +411,17 @@
         </dependency>
       </dependencies>
     </profile>
+    <!-- Profile for Celeborn -->
+    <profile>
+      <id>celeborn</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.celeborn</groupId>
+          <artifactId>celeborn-client-spark-4-shaded_2.12</artifactId>
+          <version>${celeborn.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
       <!-- Profile for Gluten -->
       <profile>
           <id>gluten</id>

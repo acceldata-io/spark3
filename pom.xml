@@ -2758,7 +2758,13 @@
         <artifactId>arpack</artifactId>
         <version>${netlib.ludovic.dev.version}</version>
       </dependency>
-    </dependencies>
+    
+      <dependency>
+        <groupId>com.squareup.okio</groupId>
+        <artifactId>okio</artifactId>
+        <version>1.17.6</version>
+      </dependency>
+</dependencies>
   </dependencyManagement>
 
   <build>

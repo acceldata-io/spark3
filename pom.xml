@@ -158,6 +158,7 @@
     <parquet.version>1.16.0</parquet.version>
     <orc.version>2.2.1</orc.version>
     <orc.classifier>shaded-protobuf</orc.classifier>
+    <vertx.version>4.5.24</vertx.version>
     <jetty.version>11.0.26</jetty.version>
     <jakartaservlet.version>5.0.0</jakartaservlet.version>
     <!-- SPARK-46938: Required by Hive / LibThrift libs -->
@@ -920,7 +921,7 @@
       <dependency>
         <groupId>org.lz4</groupId>
         <artifactId>lz4-java</artifactId>
-        <version>1.8.0</version>
+        <version>1.8.1</version>
       </dependency>
       <dependency>
         <groupId>com.github.luben</groupId>
@@ -2659,6 +2660,28 @@
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>${javaxservlet.version}</version>
+      </dependency>
+
+      <!-- CVE: vertx 4.5.14 -> 4.5.24 (OSV-23624 / CVE-2026-1002) -->
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-core</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-web-client</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-web-common</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-auth-common</artifactId>
+        <version>${vertx.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

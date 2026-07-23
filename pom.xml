@@ -221,7 +221,7 @@
     <joda.version>2.12.5</joda.version>
     <jodd.version>3.5.2</jodd.version>
     <jsr305.version>3.0.0</jsr305.version>
-    <libthrift.version>0.14.1</libthrift.version>
+    <libthrift.version>0.16.0</libthrift.version>
     <antlr4.version>4.8</antlr4.version>
     <jpam.version>1.1</jpam.version>
     <selenium.version>3.141.59</selenium.version>
@@ -240,8 +240,6 @@
     <!-- org.fusesource.leveldbjni will be used except on arm64 platform. -->
     <leveldbjni.group>org.fusesource.leveldbjni</leveldbjni.group>
     <kubernetes-client.version>5.12.2</kubernetes-client.version>
-    <!-- CVE-2024-24549: override transitive tomcat-embed-core from libthrift; 8.5.99+ required -->
-    <tomcat-embed.version>8.5.99</tomcat-embed.version>
 
     <test.java.home>${java.home}</test.java.home>
 
@@ -2656,17 +2654,6 @@
             <artifactId>slf4j-api</artifactId>
           </exclusion>
         </exclusions>
-      </dependency>
-      <!-- CVE-2024-24549: override transitive tomcat-embed-core from libthrift -->
-      <dependency>
-        <groupId>org.apache.tomcat.embed</groupId>
-        <artifactId>tomcat-embed-core</artifactId>
-        <version>${tomcat-embed.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.tomcat</groupId>
-        <artifactId>tomcat-annotations-api</artifactId>
-        <version>${tomcat-embed.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.thrift</groupId>

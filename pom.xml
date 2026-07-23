@@ -165,6 +165,7 @@
     <hudi.version>1.1.1</hudi.version>
     <iceberg.version>1.9.0</iceberg.version>
     <gluten.version>1.4.0</gluten.version>
+    <celeborn.version>0.6.2.${odp.release.version}</celeborn.version>
     <!--
     If you changes codahale.metrics.version, you also need to change
     the link to metrics.dropwizard.io in docs/monitoring.md.

@@ -197,7 +197,7 @@
     <netlib.ludovic.dev.version>2.2.1</netlib.ludovic.dev.version>
     <commons-codec.version>1.15</commons-codec.version>
     <commons-compress.version>1.26.1</commons-compress.version>
-    <commons-io.version>2.11.0</commons-io.version>
+    <commons-io.version>2.16.1</commons-io.version>
     <!-- org.apache.commons/commons-lang/-->
     <commons-lang2.version>2.6</commons-lang2.version>
     <!-- org.apache.commons/commons-lang3/-->
@@ -3499,7 +3499,7 @@
         <!-- make sure to update IsolatedClientLoader whenever this version is changed -->
         <hadoop.version>2.7.4</hadoop.version>
         <curator.version>2.7.1</curator.version>
-        <commons-io.version>2.4</commons-io.version>
+        <commons-io.version>2.16.1</commons-io.version>
         <!--
           the declaration site above of these variables explains why we need to re-assign them here
         -->

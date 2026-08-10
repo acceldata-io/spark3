@@ -428,7 +428,7 @@
           <dependencies>
               <dependency>
                   <groupId>org.apache.gluten</groupId>
-                  <artifactId>gluten-velox-bundle-spark4.0_2.13-linux_amd64</artifactId>
+                  <artifactId>gluten-velox-bundle-spark4.1_2.13-linux_amd64</artifactId>
                   <version>${gluten.version}</version>
               </dependency>
           </dependencies>

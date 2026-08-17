@@ -207,4 +207,24 @@ class TruncateTableSuite extends TruncateTableSuiteBase with CommandSuiteBase {
       }
     }
   }
+
+  test("ODP-6259: truncation of external tables is allowed when the config is set") {
+    import testImplicits._
+    withTempPath { tempDir =>
+      withNamespaceAndTable("ns", "tbl") { t =>
+        (("a", "b") :: Nil).toDF().write.parquet(tempDir.getCanonicalPath)
+        sql(s"CREATE TABLE $t $defaultUsing LOCATION '${tempDir.toURI}'")
+        assert(spark.table(t).collect().nonEmpty,
+          "bad test; table was empty to begin with")
+        withSQLConf(SQLConf.TRUNCATE_TABLE_ALLOW_EXTERNAL.key -> "true") {
+          sql(s"TRUNCATE TABLE $t")
+          assert(spark.table(t).collect().isEmpty)
+        }
+        // the external location itself must survive truncation, only its contents go
+        val path = new Path(tempDir.getCanonicalPath)
+        val fs = path.getFileSystem(spark.sessionState.newHadoopConf())
+        assert(fs.exists(path), "table location directory must still exist after truncation")
+      }
+    }
+  }
 }

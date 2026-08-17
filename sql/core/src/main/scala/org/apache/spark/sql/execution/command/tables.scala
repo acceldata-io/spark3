@@ -461,7 +461,9 @@ case class TruncateTableCommand(
     val table = catalog.getTableMetadata(tableName)
     val tableIdentWithDB = table.identifier.quotedString
 
-    if (table.tableType == CatalogTableType.EXTERNAL) {
+    // ODP-6259: external tables stay blocked by default; spark.sql.truncate.allowExternalTables
+    // opts in to truncating them, which permanently deletes the data at the external location.
+    if (table.tableType == CatalogTableType.EXTERNAL && !conf.truncateTableAllowExternal) {
       throw QueryCompilationErrors.truncateTableOnExternalTablesError(tableIdentWithDB)
     }
     if (table.partitionColumnNames.isEmpty && partitionSpec.isDefined) {

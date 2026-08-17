@@ -3655,6 +3655,15 @@ object SQLConf {
       .booleanConf
       .createWithDefault(false)
 
+  val TRUNCATE_TABLE_ALLOW_EXTERNAL =
+    buildConf("spark.sql.truncate.allowExternalTables")
+      .doc("When set to true, TRUNCATE TABLE is permitted on external tables. " +
+        "This permanently deletes all data at the external storage location. " +
+        "Use with caution: data cannot be recovered after truncation.")
+      .version("3.5.5")
+      .booleanConf
+      .createWithDefault(false)
+
   val NAME_NON_STRUCT_GROUPING_KEY_AS_VALUE =
     buildConf("spark.sql.legacy.dataset.nameNonStructGroupingKeyAsValue")
       .internal()
@@ -5182,6 +5191,9 @@ class SQLConf extends Serializable with Logging with SqlApiConf {
 
   def truncateTableIgnorePermissionAcl: Boolean =
     getConf(SQLConf.TRUNCATE_TABLE_IGNORE_PERMISSION_ACL)
+
+  def truncateTableAllowExternal: Boolean =
+    getConf(SQLConf.TRUNCATE_TABLE_ALLOW_EXTERNAL)
 
   def nameNonStructGroupingKeyAsValue: Boolean =
     getConf(SQLConf.NAME_NON_STRUCT_GROUPING_KEY_AS_VALUE)

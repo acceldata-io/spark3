@@ -4448,7 +4448,7 @@
   },
   "_LEGACY_ERROR_TEMP_1266" : {
     "message" : [
-      "Operation not allowed: TRUNCATE TABLE on external tables: <tableIdentWithDB>."
+      "Operation not allowed: TRUNCATE TABLE on external tables: <tableIdentWithDB>. Set spark.sql.truncate.allowExternalTables=true to enable this."
     ]
   },
   "_LEGACY_ERROR_TEMP_1267" : {

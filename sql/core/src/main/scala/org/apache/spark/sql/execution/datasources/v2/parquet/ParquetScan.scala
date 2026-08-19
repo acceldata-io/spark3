@@ -28,7 +28,7 @@ import org.apache.spark.sql.connector.expressions.aggregate.Aggregation
 import org.apache.spark.sql.connector.read.PartitionReaderFactory
 import org.apache.spark.sql.execution.datasources.{AggregatePushDownUtils, PartitioningAwareFileIndex}
 import org.apache.spark.sql.execution.datasources.parquet.{ParquetOptions, ParquetReadSupport, ParquetWriteSupport}
-import org.apache.spark.sql.execution.datasources.v2.FileScan
+import org.apache.spark.sql.execution.datasources.v2.FileScanRuntimeFiltering
 import org.apache.spark.sql.internal.SQLConf
 import org.apache.spark.sql.sources.Filter
 import org.apache.spark.sql.types.StructType
@@ -45,8 +45,9 @@ case class ParquetScan(
     pushedFilters: Array[Filter],
     options: CaseInsensitiveStringMap,
     pushedAggregate: Option[Aggregation] = None,
-    partitionFilters: Seq[Expression] = Seq.empty,
-    dataFilters: Seq[Expression] = Seq.empty) extends FileScan {
+    staticPartitionFilters: Seq[Expression] = Seq.empty,
+    dataFilters: Seq[Expression] = Seq.empty) extends FileScanRuntimeFiltering {
+
   override def isSplitable(path: Path): Boolean = {
     // If aggregate is pushed down, only the file footer will be read once,
     // so file should not be split across multiple tasks.
@@ -113,8 +114,10 @@ case class ParquetScan(
       } else {
         pushedAggregate.isEmpty && p.pushedAggregate.isEmpty
       }
+      // `FileScan.equals` caches normalized `partitionFilters`, so compare runtime ones directly.
       super.equals(p) && dataSchema == p.dataSchema && options == p.options &&
-        equivalentFilters(pushedFilters, p.pushedFilters) && pushedDownAggEqual
+        equivalentFilters(pushedFilters, p.pushedFilters) && pushedDownAggEqual &&
+        dynamicPartitionFiltersSql == p.dynamicPartitionFiltersSql
     case _ => false
   }
 

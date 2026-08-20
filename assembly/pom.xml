@@ -360,7 +360,7 @@
     </profile>
     <!-- Profile for Gluten Velox -->
     <profile>
-      <id>gluten-velox</id>
+      <id>gluten</id>
       <dependencies>
         <!-- Main Gluten Velox Bundle -->
         <dependency>

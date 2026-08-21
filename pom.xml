@@ -168,7 +168,7 @@
     <ivy.version>2.5.3</ivy.version>
     <oro.version>2.0.8</oro.version>
     <deltalake.version>4.1.0</deltalake.version>
-    <hudi.version>1.1.1</hudi.version>
+    <hudi.version>1.2.0</hudi.version>
     <iceberg.version>1.10.2</iceberg.version>
     <gluten.version>1.7.0.3.3.6.5</gluten.version>
     <celeborn.version>0.6.2.${odp.release.version}</celeborn.version>

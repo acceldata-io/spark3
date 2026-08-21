@@ -321,11 +321,22 @@
       <dependencies>
         <dependency>
           <groupId>io.delta</groupId>
-          <artifactId>delta-spark_2.12</artifactId>
+          <artifactId>delta-spark_${scala.binary.version}</artifactId>
           <version>${deltalake.version}</version>
-      </dependency>
+        </dependency>
+        <dependency>
+          <groupId>io.delta</groupId>
+          <artifactId>delta-storage</artifactId>
+          <version>${deltalake.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>io.delta</groupId>
+          <artifactId>delta-iceberg_${scala.binary.version}</artifactId>
+          <version>${delta-iceberg.version}</version>
+        </dependency>
       </dependencies>
     </profile>
+    <!-- Profile for Hudi -->
     <profile>
       <id>hudi</id>
       <dependencies>
@@ -345,6 +356,21 @@
           <artifactId>iceberg-spark-runtime-3.5_${scala.binary.version}</artifactId>
           <version>${iceberg.version}</version>
         </dependency>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-aws-bundle</artifactId>
+          <version>${iceberg.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-azure-bundle</artifactId>
+          <version>${iceberg.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-gcp-bundle</artifactId>
+          <version>${iceberg.version}</version>
+        </dependency>
       </dependencies>
     </profile>
     <!-- Profile for Celeborn -->
@@ -353,7 +379,7 @@
       <dependencies>
 	<dependency>
 	  <groupId>org.apache.celeborn</groupId>
-	  <artifactId>celeborn-client-spark-3-shaded_2.12</artifactId>
+	  <artifactId>celeborn-client-spark-3-shaded_${scala.binary.version}</artifactId>
 	  <version>${celeborn.version}</version>
         </dependency>
       </dependencies>

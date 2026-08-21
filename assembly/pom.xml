@@ -385,9 +385,19 @@
       <dependencies>
         <dependency>
           <groupId>io.delta</groupId>
-          <artifactId>delta-spark_2.13</artifactId>
+          <artifactId>delta-spark_${scala.binary.version}</artifactId>
           <version>${deltalake.version}</version>
-      </dependency>
+        </dependency>
+        <dependency>
+          <groupId>io.delta</groupId>
+          <artifactId>delta-storage</artifactId>
+          <version>${deltalake.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>io.delta</groupId>
+          <artifactId>delta-iceberg_${scala.binary.version}</artifactId>
+          <version>${deltalake.version}</version>
+        </dependency>
       </dependencies>
     </profile>
     <profile>
@@ -395,7 +405,7 @@
       <dependencies>
         <dependency>
           <groupId>org.apache.hudi</groupId>
-          <artifactId>hudi-spark3.5-bundle_${scala.binary.version}</artifactId>
+          <artifactId>hudi-spark4.1-bundle_${scala.binary.version}</artifactId>
           <version>${hudi.version}</version>
         </dependency>
       </dependencies>
@@ -406,7 +416,22 @@
       <dependencies>
         <dependency>
           <groupId>org.apache.iceberg</groupId>
-          <artifactId>iceberg-spark-runtime-3.5_${scala.binary.version}</artifactId>
+          <artifactId>iceberg-spark-runtime-4.1_${scala.binary.version}</artifactId>
+          <version>${iceberg.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-aws-bundle</artifactId>
+          <version>${iceberg.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-azure-bundle</artifactId>
+          <version>${iceberg.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.iceberg</groupId>
+          <artifactId>iceberg-gcp-bundle</artifactId>
           <version>${iceberg.version}</version>
         </dependency>
       </dependencies>
@@ -417,7 +442,7 @@
       <dependencies>
         <dependency>
           <groupId>org.apache.celeborn</groupId>
-          <artifactId>celeborn-client-spark-4-shaded_2.13</artifactId>
+          <artifactId>celeborn-client-spark-4-shaded_${scala.binary.version}</artifactId>
           <version>${celeborn.version}</version>
         </dependency>
       </dependencies>
@@ -428,7 +453,7 @@
           <dependencies>
               <dependency>
                   <groupId>org.apache.gluten</groupId>
-                  <artifactId>gluten-velox-bundle-spark4.1_2.13-linux_amd64</artifactId>
+                  <artifactId>gluten-velox-bundle-spark4.1_${scala.binary.version}-linux_amd64</artifactId>
                   <version>${gluten.version}</version>
               </dependency>
           </dependencies>

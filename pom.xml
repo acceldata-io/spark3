@@ -161,9 +161,10 @@
     <chill.version>0.10.0</chill.version>
     <ivy.version>2.5.2</ivy.version>
     <oro.version>2.0.8</oro.version>
-    <deltalake.version>3.3.1</deltalake.version>
-    <hudi.version>1.1.1</hudi.version>
-    <iceberg.version>1.9.0</iceberg.version>
+    <deltalake.version>3.3.3</deltalake.version>
+    <delta-iceberg.version>3.3.2</delta-iceberg.version>
+    <hudi.version>1.2.0</hudi.version>
+    <iceberg.version>1.11.0</iceberg.version>
     <gluten.version>1.4.0</gluten.version>
     <celeborn.version>0.6.2.${odp.release.version}</celeborn.version>
     <!--
@@ -2921,7 +2922,7 @@
                       <exclude>*:*_2.10</exclude>
                     </excludes>
                     <includes>
-                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:jar:1.5.0</include>
+                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_${scala.binary.version}:jar:${iceberg.version}</include>
                     </includes>
                     <searchTransitive>true</searchTransitive>
                   </bannedDependencies>

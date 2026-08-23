@@ -71,9 +71,10 @@ import org.apache.spark.network.yarn.util.HadoopConfigProvider;
  *
  * This is intended to be a long-running auxiliary service that runs in the NodeManager process.
  * A Spark application may connect to this service by setting `spark.shuffle.service.enabled`.
- * The application also automatically derives the service port through `spark.shuffle.service.port`
- * specified in the Yarn configuration. This is so that both the clients and the server agree on
- * the same port to communicate on.
+ * The application also automatically derives the service port through
+ * `spark.shuffle.service.v412.port` specified in the Yarn configuration. This is so that both the
+ * clients and the server agree on the same port to communicate on. Client applications still use
+ * `spark.shuffle.service.port` (set to the same numeric value in spark-defaults).
  *
  * The service also optionally supports authentication. This ensures that executors from one
  * application cannot read the shuffle files written by those from another. This feature can be
@@ -104,8 +105,8 @@ public class YarnShuffleService extends AuxiliaryService {
   private SparkLogger logger = defaultSparkLogger;
 
   // Port on which the shuffle server listens for fetch requests
-  private static final String SPARK_SHUFFLE_SERVICE_PORT_KEY = "spark.shuffle.service.port";
-  private static final int DEFAULT_SPARK_SHUFFLE_SERVICE_PORT = 7337;
+  private static final String SPARK_SHUFFLE_SERVICE_PORT_KEY = "spark.shuffle.service.v412.port";
+  private static final int DEFAULT_SPARK_SHUFFLE_SERVICE_PORT = 7341;
 
   /**
    * The namespace to use for the metrics record which will contain all metrics produced by the
@@ -213,7 +214,7 @@ public class YarnShuffleService extends AuxiliaryService {
     // It is hard-coded instead of using the value of the `spark.shuffle.service.name` configuration
     // because at this point in instantiation there is no Configuration object; it is not passed
     // until `serviceInit` is called, at which point it's too late to adjust the name.
-    super("spark_shuffle");
+    super("spark_shuffle_412");
     logger.info("Initializing YARN shuffle service for Spark");
     instance = this;
   }

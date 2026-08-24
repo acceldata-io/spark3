@@ -295,6 +295,8 @@ cp -r "$SPARK_HOME/python" "$DISTDIR"
 # Remove the python distribution from dist/ if we built it
 if [ "$MAKE_PIP" == "true" ]; then
   rm -f "$DISTDIR"/python/dist/pyspark-*.tar.gz
+  rm -f "$DISTDIR"/python/dist/pyspark_connect-*.tar.gz
+  rm -f "$DISTDIR"/python/dist/pyspark_client-*.tar.gz
 fi
 
 cp -r "$SPARK_HOME/sbin" "$DISTDIR"

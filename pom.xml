@@ -2870,6 +2870,7 @@
                       <exclude>org.threeten:threeten-extra</exclude>
                       <exclude>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12</exclude>
                       <exclude>org.apache.iceberg:*</exclude>
+                      <exclude>org.apache.hudi:*</exclude>
                     </excludes>
                   </enforceBytecodeVersion>
                 </rules>

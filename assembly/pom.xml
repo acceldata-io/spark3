@@ -81,7 +81,12 @@
     </dependency>
     <dependency>
       <groupId>io.delta</groupId>
-      <artifactId>delta-spark_2.12</artifactId>
+      <artifactId>delta-spark_${scala.binary.version}</artifactId>
+      <version>${deltalake.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.delta</groupId>
+      <artifactId>delta-storage</artifactId>
       <version>${deltalake.version}</version>
     </dependency>
     <dependency>

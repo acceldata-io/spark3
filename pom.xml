@@ -2855,7 +2855,7 @@
                       <exclude>*:*_2.10</exclude>
                     </excludes>
                     <includes>
-                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:jar:1.5.0</include>
+                      <include>org.apache.iceberg:iceberg-spark-runtime-3.5_${scala.binary.version}:jar:${iceberg.version}</include>
                     </includes>
                     <searchTransitive>true</searchTransitive>
                   </bannedDependencies>
@@ -2868,7 +2868,7 @@
                         TODO(SPARK-44032): Remove the exclusion of threeten-extra when orc-core fixes the violation
                       -->
                       <exclude>org.threeten:threeten-extra</exclude>
-                      <exclude>org.apache.iceberg:iceberg-spark-runtime-3.5_2.12</exclude>
+                      <exclude>org.apache.iceberg:iceberg-spark-runtime-3.5_${scala.binary.version}</exclude>
                       <exclude>org.apache.iceberg:*</exclude>
                       <exclude>org.apache.hudi:*</exclude>
                     </excludes>

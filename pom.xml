@@ -131,7 +131,13 @@
     <!-- make sure to update IsolatedClientLoader whenever this version is changed -->
     <hadoop.version>3.3.6.${odp.release.version}</hadoop.version>
     <!-- SPARK-42188: When updating `protobuf.version`, also need to update `protoVersion` in `SparkBuild.scala` -->
-    <protobuf.version>2.5.0</protobuf.version>
+    <!-- ODP-7671: 2.5.0 lacks LazyStringList.getUnmodifiableView(), which HWC's own bundled ORC
+         classes call unshaded (com.google.protobuf.*, not relocated by HWC's shade rules) -- the
+         old platform jar shadows HWC's own newer bundled copy at classpath resolution time,
+         throwing NoSuchMethodError on every ACID operation. 3.25.5 matches what spark351/spark355
+         (ODP-7640-Spark351/355) already ship, confirmed live on cluster rl9 to coexist safely with
+         this same hadoop-client-api version. -->
+    <protobuf.version>3.25.5</protobuf.version>
     <yarn.version>${hadoop.version}</yarn.version>
     <zookeeper.version>3.8.4.${odp.release.version}</zookeeper.version>
     <curator.version>2.13.0</curator.version>
@@ -147,7 +153,12 @@
     <!-- After 10.15.1.3, the minimum required version is JDK9 -->
     <derby.version>10.14.2.0</derby.version>
     <parquet.version>1.12.2</parquet.version>
-    <orc.version>1.7.8</orc.version>
+    <!-- ODP-7671: unshaded 1.7.8 forces the ORC-bundled protobuf classes to resolve against the
+         platform's own protobuf-java (see protobuf.version above), which is exactly the version
+         mismatch that breaks HWC. shaded-protobuf matches spark351/spark355
+         (ODP-7640-Spark351/355) and confirmed live to fix the same failure on spark333. -->
+    <orc.version>1.9.5</orc.version>
+    <orc.classifier>shaded-protobuf</orc.classifier>
     <jetty.version>9.4.57.v20241219</jetty.version>
     <jakartaservlet.version>4.0.3</jakartaservlet.version>
     <chill.version>0.10.0</chill.version>
@@ -2517,6 +2528,7 @@
         <groupId>org.apache.orc</groupId>
         <artifactId>orc-core</artifactId>
         <version>${orc.version}</version>
+        <classifier>${orc.classifier}</classifier>
         <scope>${orc.deps.scope}</scope>
         <exclusions>
           <exclusion>
@@ -2546,6 +2558,7 @@
         <groupId>org.apache.orc</groupId>
         <artifactId>orc-mapreduce</artifactId>
         <version>${orc.version}</version>
+        <classifier>${orc.classifier}</classifier>
         <scope>${orc.deps.scope}</scope>
         <exclusions>
           <exclusion>

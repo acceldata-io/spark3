@@ -132,7 +132,7 @@
     <hadoop.version>3.3.6.${odp.release.version}</hadoop.version>
     <!-- SPARK-42188: When updating `protobuf.version`, also need to update `protoVersion` in `SparkBuild.scala` -->
     <!-- ODP-7671: 2.5.0 lacks LazyStringList.getUnmodifiableView(), which HWC's own bundled ORC
-         classes call unshaded (com.google.protobuf.*, not relocated by HWC's shade rules) -- the
+         classes call unshaded (com.google.protobuf.*, not relocated by HWC's shade rules); the
          old platform jar shadows HWC's own newer bundled copy at classpath resolution time,
          throwing NoSuchMethodError on every ACID operation. 3.25.5 matches what spark351/spark355
          (ODP-7640-Spark351/355) already ship, confirmed live on cluster rl9 to coexist safely with

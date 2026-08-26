@@ -117,12 +117,6 @@ private[hive] class HiveClientImpl(
   private val outputBuffer = new CircularBuffer()
 
   private val shim = version match {
-    case hive.v12 => new Shim_v0_12()
-    case hive.v13 => new Shim_v0_13()
-    case hive.v14 => new Shim_v0_14()
-    case hive.v1_0 => new Shim_v1_0()
-    case hive.v1_1 => new Shim_v1_1()
-    case hive.v1_2 => new Shim_v1_2()
     case hive.v2_0 => new Shim_v2_0()
     case hive.v2_1 => new Shim_v2_1()
     case hive.v2_2 => new Shim_v2_2()
@@ -188,8 +182,11 @@ private[hive] class HiveClientImpl(
     shim.setCurrentSessionState(state)
     val clz = state.getClass.getField("out").getType.asInstanceOf[Class[_ <: PrintStream]]
     val ctor = clz.getConstructor(classOf[OutputStream], classOf[Boolean], classOf[String])
-    state.getClass.getField("out").set(state, ctor.newInstance(outputBuffer, true, UTF_8.name()))
-    state.getClass.getField("err").set(state, ctor.newInstance(outputBuffer, true, UTF_8.name()))
+    val autoFlush = java.lang.Boolean.TRUE
+    state.getClass.getField("out")
+      .set(state, ctor.newInstance(outputBuffer, autoFlush, UTF_8.name()))
+    state.getClass.getField("err")
+      .set(state, ctor.newInstance(outputBuffer, autoFlush, UTF_8.name()))
     state
   }
 

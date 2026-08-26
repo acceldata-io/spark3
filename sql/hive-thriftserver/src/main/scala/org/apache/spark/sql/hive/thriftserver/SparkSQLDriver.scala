@@ -30,7 +30,7 @@ import org.apache.spark.SparkThrowable
 import org.apache.spark.internal.Logging
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.catalyst.plans.logical.CommandResult
-import org.apache.spark.sql.execution.{QueryExecution, QueryExecutionException, SQLExecution}
+import org.apache.spark.sql.execution.{QueryExecution, SQLExecution}
 import org.apache.spark.sql.execution.HiveResult.hiveResultString
 import org.apache.spark.sql.internal.{SQLConf, VariableSubstitution}
 
@@ -81,7 +81,7 @@ private[hive] class SparkSQLDriver(val context: SQLContext = SparkSQLEnv.sqlCont
     } catch {
         case st: SparkThrowable =>
           logDebug(s"Failed in [$command]", st)
-          throw st
+          new CommandProcessorResponse(1, ExceptionUtils.getStackTrace(st), st.getSqlState, st)
         case cause: Throwable =>
           logError(s"Failed in [$command]", cause)
           new CommandProcessorResponse(1, ExceptionUtils.getStackTrace(cause), null, cause)

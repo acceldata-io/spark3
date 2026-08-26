@@ -1889,8 +1889,8 @@ private[client] class Shim_v4_0 extends Shim_v3_1 {
     }
     assert(loadFileType.isDefined)
     recordHiveCall()
-    val resetStatistics = false
-    val isDirectInsert = false
+    val resetStatistics: JBoolean = false
+    val isDirectInsert: JBoolean = false
     loadTableMethod.invoke(
       hive,
       loadPath,
@@ -1927,8 +1927,8 @@ private[client] class Shim_v4_0 extends Shim_v3_1 {
       ignoreIfExists: Boolean): Unit = {
     val partitions = parts.map(HiveClientImpl.toHivePartition(_, table).getTPartition).asJava
     recordHiveCall()
-    val needResults = false
-    addPartitionsMethod.invoke(hive, partitions, ignoreIfExists, needResults: JBoolean)
+    val needResults: JBoolean = false
+    addPartitionsMethod.invoke(hive, partitions, ignoreIfExists: JBoolean, needResults)
   }
 
   override def loadPartition(
@@ -2000,6 +2000,7 @@ private[client] class Shim_v4_0 extends Shim_v3_1 {
         replace: JBoolean,
         useAppendForLoad,
         partSpec)
+      .asInstanceOf[AnyRef]
     val ctx = new DynamicPartitionCtx()
     ctx.setRootPath(loadPath)
     ctx.setNumDPCols(numDP)

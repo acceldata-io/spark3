@@ -17,9 +17,10 @@
 
 package org.apache.spark.sql.hive.client
 
+// SPARK-45265: on Scala 2.12 the default `IndexedSeq` is `scala.collection.IndexedSeq`,
+// so this import is required to keep `versions` an immutable IndexedSeq for the
+// `Suites` aggregators (`nestedSuites` requires immutable.IndexedSeq).
 import scala.collection.immutable.IndexedSeq
-
-import org.apache.commons.lang3.{JavaVersion, SystemUtils}
 
 private[client] trait HiveClientVersions {
   private val testVersions = sys.env.get("SPARK_TEST_HIVE_CLIENT_VERSIONS")

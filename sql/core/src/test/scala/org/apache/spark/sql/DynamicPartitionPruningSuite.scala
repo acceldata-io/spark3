@@ -19,19 +19,22 @@ package org.apache.spark.sql
 
 import org.scalatest.GivenWhenThen
 
-import org.apache.spark.sql.catalyst.expressions.{DynamicPruningExpression, Expression}
+import org.apache.spark.sql.catalyst.expressions.{DynamicPruningExpression, Expression, InSet}
 import org.apache.spark.sql.catalyst.expressions.CodegenObjectFactoryMode._
 import org.apache.spark.sql.catalyst.plans.ExistenceJoin
 import org.apache.spark.sql.connector.catalog.{InMemoryTableCatalog, InMemoryTableWithV2FilterCatalog}
+import org.apache.spark.sql.connector.expressions.{FieldReference, LiteralValue}
+import org.apache.spark.sql.connector.expressions.filter.Predicate
 import org.apache.spark.sql.execution._
 import org.apache.spark.sql.execution.adaptive._
-import org.apache.spark.sql.execution.datasources.v2.BatchScanExec
+import org.apache.spark.sql.execution.datasources.v2.{BatchScanExec, FileScanRuntimeFiltering}
 import org.apache.spark.sql.execution.exchange.{BroadcastExchangeLike, ReusedExchangeExec}
 import org.apache.spark.sql.execution.joins.BroadcastHashJoinExec
 import org.apache.spark.sql.execution.streaming.{MemoryStream, StreamingQueryWrapper}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.internal.SQLConf
 import org.apache.spark.sql.test.{SharedSparkSession, SQLTestUtils}
+import org.apache.spark.sql.types.IntegerType
 
 /**
  * Test suite for the filtering ratio policy used to trigger dynamic partition pruning (DPP).
@@ -1851,4 +1854,63 @@ class DynamicPartitionPruningV2FilterSuiteAEOff
 
 class DynamicPartitionPruningV2FilterSuiteAEOn
     extends DynamicPartitionPruningV2FilterSuite
+  with EnableAdaptiveExecutionSuite
+
+/**
+ * Test suite for dynamic partition pruning on the built-in v2 file sources.
+ */
+abstract class DynamicPartitionPruningV2FileSourceSuite extends QueryTest
+    with SharedSparkSession
+    with AdaptiveSparkPlanHelper {
+
+  import testImplicits._
+
+  private def fileScanOf(df: DataFrame): FileScanRuntimeFiltering = {
+    collectFirst(df.queryExecution.executedPlan) {
+      case b: BatchScanExec => b.scan.asInstanceOf[FileScanRuntimeFiltering]
+    }.get
+  }
+
+  Seq("parquet", "orc").foreach { format =>
+    test(s"SPARK-53439: v2 $format scan prunes partitions with runtime filters") {
+      withSQLConf(
+          SQLConf.USE_V1_SOURCE_LIST.key -> "",
+          SQLConf.DYNAMIC_PARTITION_PRUNING_ENABLED.key -> "true",
+          SQLConf.DYNAMIC_PARTITION_PRUNING_REUSE_BROADCAST_ONLY.key -> "false",
+          SQLConf.EXCHANGE_REUSE_ENABLED.key -> "false") {
+        withTempPath { dir =>
+          spark.range(10).select($"id", ($"id" % 5).as("day"))
+            .write.partitionBy("day").format(format).save(s"$dir/fact")
+          // `day` is read back as an int by partition inference, so keep the join key types equal.
+          spark.range(5).select($"id".cast("int").as("day"), ($"id" * 10).as("v"))
+            .write.format(format).save(s"$dir/dim")
+          spark.read.format(format).load(s"$dir/fact").createOrReplaceTempView("fact")
+          spark.read.format(format).load(s"$dir/dim").createOrReplaceTempView("dim")
+
+          val df = sql("SELECT f.id FROM fact f JOIN dim d ON f.day = d.day WHERE d.v = 30")
+          checkAnswer(df, Row(3) :: Row(8) :: Nil)
+
+          val scan = fileScanOf(df)
+          assert(scan.partitionFilters.exists(_.isInstanceOf[InSet]))
+          // Only the day=3 directory survives, out of the five that were written.
+          assert(scan.fileIndex.listFiles(scan.partitionFilters, Nil).length == 1)
+
+          // `filter` always carries the complete set of runtime predicates, so calling it again
+          // must not grow the filter list.
+          val predicates = Array(
+            new Predicate("IN", Array(FieldReference.column("day"), LiteralValue(3, IntegerType))))
+          scan.filter(predicates)
+          val once = scan.partitionFilters.map(_.sql)
+          scan.filter(predicates)
+          assert(scan.partitionFilters.map(_.sql) == once)
+        }
+      }
+    }
+  }
+}
+
+class DynamicPartitionPruningV2FileSourceSuiteAEOff extends DynamicPartitionPruningV2FileSourceSuite
+  with DisableAdaptiveExecutionSuite
+
+class DynamicPartitionPruningV2FileSourceSuiteAEOn extends DynamicPartitionPruningV2FileSourceSuite
   with EnableAdaptiveExecutionSuite

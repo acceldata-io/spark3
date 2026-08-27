@@ -28,7 +28,7 @@ import org.apache.spark.sql.connector.expressions.aggregate.Aggregation
 import org.apache.spark.sql.connector.read.PartitionReaderFactory
 import org.apache.spark.sql.execution.datasources.{AggregatePushDownUtils, PartitioningAwareFileIndex}
 import org.apache.spark.sql.execution.datasources.orc.OrcOptions
-import org.apache.spark.sql.execution.datasources.v2.FileScan
+import org.apache.spark.sql.execution.datasources.v2.FileScanRuntimeFiltering
 import org.apache.spark.sql.sources.Filter
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
@@ -45,8 +45,9 @@ case class OrcScan(
     options: CaseInsensitiveStringMap,
     pushedAggregate: Option[Aggregation] = None,
     pushedFilters: Array[Filter],
-    partitionFilters: Seq[Expression] = Seq.empty,
-    dataFilters: Seq[Expression] = Seq.empty) extends FileScan {
+    staticPartitionFilters: Seq[Expression] = Seq.empty,
+    dataFilters: Seq[Expression] = Seq.empty) extends FileScanRuntimeFiltering {
+
   override def isSplitable(path: Path): Boolean = {
     // If aggregate is pushed down, only the file footer will be read once,
     // so file should not be split across multiple tasks.
@@ -86,7 +87,8 @@ case class OrcScan(
         pushedAggregate.isEmpty && o.pushedAggregate.isEmpty
       }
       super.equals(o) && dataSchema == o.dataSchema && options == o.options &&
-        equivalentFilters(pushedFilters, o.pushedFilters) && pushedDownAggEqual
+        equivalentFilters(pushedFilters, o.pushedFilters) && pushedDownAggEqual &&
+        dynamicPartitionFiltersSql == o.dynamicPartitionFiltersSql
     case _ => false
   }
 

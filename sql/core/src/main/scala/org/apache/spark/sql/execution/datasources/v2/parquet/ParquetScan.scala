@@ -28,7 +28,7 @@ import org.apache.spark.sql.connector.expressions.aggregate.Aggregation
 import org.apache.spark.sql.connector.read.{PartitionReaderFactory, VariantExtraction}
 import org.apache.spark.sql.execution.datasources.{AggregatePushDownUtils, PartitioningAwareFileIndex, VariantMetadata}
 import org.apache.spark.sql.execution.datasources.parquet.{ParquetOptions, ParquetReadSupport, ParquetWriteSupport}
-import org.apache.spark.sql.execution.datasources.v2.FileScan
+import org.apache.spark.sql.execution.datasources.v2.FileScanRuntimeFiltering
 import org.apache.spark.sql.internal.SQLConf
 import org.apache.spark.sql.sources.Filter
 import org.apache.spark.sql.types.{BooleanType, DataType, StructField, StructType, VariantType}
@@ -46,9 +46,11 @@ case class ParquetScan(
     pushedFilters: Array[Filter],
     options: CaseInsensitiveStringMap,
     pushedAggregate: Option[Aggregation] = None,
-    partitionFilters: Seq[Expression] = Seq.empty,
+    staticPartitionFilters: Seq[Expression] = Seq.empty,
     dataFilters: Seq[Expression] = Seq.empty,
-    pushedVariantExtractions: Array[VariantExtraction] = Array.empty) extends FileScan {
+    pushedVariantExtractions: Array[VariantExtraction] = Array.empty)
+    extends FileScanRuntimeFiltering {
+
   override def isSplitable(path: Path): Boolean = {
     // If aggregate is pushed down, only the file footer will be read once,
     // so file should not be split across multiple tasks.
@@ -185,9 +187,11 @@ case class ParquetScan(
       val pushedVariantEqual =
         java.util.Arrays.equals(pushedVariantExtractions.asInstanceOf[Array[Object]],
           p.pushedVariantExtractions.asInstanceOf[Array[Object]])
+      // `FileScan.equals` caches normalized `partitionFilters`, so compare runtime ones directly.
       super.equals(p) && dataSchema == p.dataSchema && options == p.options &&
         equivalentFilters(pushedFilters, p.pushedFilters) && pushedDownAggEqual &&
-        pushedVariantEqual
+        pushedVariantEqual &&
+        dynamicPartitionFiltersSql == p.dynamicPartitionFiltersSql
     case _ => false
   }
 

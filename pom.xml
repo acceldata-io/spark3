@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.spark</groupId>
   <artifactId>spark-parent_2.12</artifactId>
-  <version>3.5.8.3.4.3.0-1</version>
+  <version>3.5.8.3.4.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Spark Project Parent POM</name>
   <url>https://spark.apache.org/</url>
@@ -123,7 +123,7 @@
   </modules>
 
   <properties>
-    <odp.release.version>3.4.3.0-1</odp.release.version>
+    <odp.release.version>3.4.3.0-SNAPSHOT</odp.release.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version>

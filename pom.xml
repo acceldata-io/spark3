@@ -169,7 +169,7 @@
     <deltalake.version>4.3.1</deltalake.version>
     <hudi.version>1.2.0</hudi.version>
     <iceberg.version>1.11.0</iceberg.version>
-    <gluten.version>1.7.0</gluten.version>
+    <gluten.version>1.7.0.3.4.3.0</gluten.version>
     <celeborn.version>0.6.3.${odp.release.version}</celeborn.version>
     <!--
     If you change codahale.metrics.version, you also need to change

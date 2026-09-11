@@ -243,6 +243,7 @@
     <bouncycastle.version>1.70</bouncycastle.version>
     <tink.version>1.9.0</tink.version>
     <netty.version>4.1.137.Final</netty.version>
+    <jline3.version>3.30.14</jline3.version>
     <!--
     If you are changing Arrow version specification, please check
     ./python/pyspark/sql/pandas/utils.py, and ./python/setup.py too.
@@ -967,6 +968,16 @@
             <artifactId>netty-transport-udt</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.jline</groupId>
+        <artifactId>jline</artifactId>
+        <version>${jline3.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jline</groupId>
+        <artifactId>jline-remote-telnet</artifactId>
+        <version>${jline3.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.derby</groupId>

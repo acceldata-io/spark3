@@ -242,7 +242,7 @@
     <commons-cli.version>1.5.0</commons-cli.version>
     <bouncycastle.version>1.70</bouncycastle.version>
     <tink.version>1.9.0</tink.version>
-    <netty.version>4.1.135.Final</netty.version>
+    <netty.version>4.1.137.Final</netty.version>
     <!--
     If you are changing Arrow version specification, please check
     ./python/pyspark/sql/pandas/utils.py, and ./python/setup.py too.
@@ -892,7 +892,7 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-all</artifactId>
-        <version>4.1.74.Final</version>
+        <version>${netty.version}</version>
         <exclusions>
           <exclusion>
             <groupId>io.netty</groupId>

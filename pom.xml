@@ -243,6 +243,7 @@
     <icu4j.version>77.1</icu4j.version>
     <junit.version>6.0.0</junit.version>
     <jline.version>2.14.6</jline.version>
+    <jline3.version>3.30.14</jline3.version>
     <!--
       SPARK-50299: When updating `sbt-jupiter-interface.version`,
       also need to update the version in `SparkBuild.scala` and `plugins.sbt`.
@@ -1240,6 +1241,16 @@
         <groupId>org.scala-lang.modules</groupId>
         <artifactId>scala-parser-combinators_${scala.binary.version}</artifactId>
         <version>2.4.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jline</groupId>
+        <artifactId>jline</artifactId>
+        <version>${jline3.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jline</groupId>
+        <artifactId>jline-remote-telnet</artifactId>
+        <version>${jline3.version}</version>
       </dependency>
       <dependency>
         <groupId>jline</groupId>

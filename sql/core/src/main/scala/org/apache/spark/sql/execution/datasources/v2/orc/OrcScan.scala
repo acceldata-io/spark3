@@ -25,7 +25,7 @@ import org.apache.spark.memory.MemoryMode
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.connector.expressions.aggregate.Aggregation
-import org.apache.spark.sql.connector.read.PartitionReaderFactory
+import org.apache.spark.sql.connector.read.{PartitionReaderFactory, Scan}
 import org.apache.spark.sql.execution.datasources.{AggregatePushDownUtils, PartitioningAwareFileIndex}
 import org.apache.spark.sql.execution.datasources.orc.OrcOptions
 import org.apache.spark.sql.execution.datasources.v2.FileScanRuntimeFiltering
@@ -47,6 +47,18 @@ case class OrcScan(
     pushedFilters: Array[Filter],
     staticPartitionFilters: Seq[Expression] = Seq.empty,
     dataFilters: Seq[Expression] = Seq.empty) extends FileScanRuntimeFiltering {
+
+  override def columnarSupportMode(): Scan.ColumnarSupportMode = {
+    if (!conf.getConfString(
+        "spark.sql.files.v2.columnarSupportWithoutInputPartitions.enabled", "true").toBoolean) {
+      Scan.ColumnarSupportMode.PARTITION_DEFINED
+    } else if (OrcPartitionReaderFactory.supportsColumnarReads(
+        conf, readDataSchema, readPartitionSchema)) {
+      Scan.ColumnarSupportMode.SUPPORTED
+    } else {
+      Scan.ColumnarSupportMode.UNSUPPORTED
+    }
+  }
 
   override def isSplitable(path: Path): Boolean = {
     // If aggregate is pushed down, only the file footer will be read once,

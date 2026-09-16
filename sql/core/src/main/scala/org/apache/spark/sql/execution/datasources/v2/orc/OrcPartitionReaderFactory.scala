@@ -66,12 +66,8 @@ case class OrcPartitionReaderFactory(
   private val capacity = sqlConf.orcVectorizedReaderBatchSize
   private val orcFilterPushDown = sqlConf.orcFilterPushDown
 
-  override def supportColumnarReads(partition: InputPartition): Boolean = {
-    sqlConf.orcVectorizedReaderEnabled && sqlConf.wholeStageEnabled &&
-      !WholeStageCodegenExec.isTooManyFields(sqlConf, resultSchema) &&
-      resultSchema.forall(s => OrcUtils.supportColumnarReads(
-        s.dataType, sqlConf.orcVectorizedReaderNestedColumnEnabled))
-  }
+  override def supportColumnarReads(partition: InputPartition): Boolean =
+    OrcPartitionReaderFactory.supportsColumnarReads(sqlConf, readDataSchema, partitionSchema)
 
   private def pushDownPredicates(orcSchema: TypeDescription, conf: Configuration): Unit = {
     if (orcFilterPushDown && filters.nonEmpty) {
@@ -233,5 +229,18 @@ case class OrcPartitionReaderFactory(
 
       override def close(): Unit = {}
     }
+  }
+}
+
+private[v2] object OrcPartitionReaderFactory {
+  def supportsColumnarReads(
+      sqlConf: SQLConf,
+      readDataSchema: StructType,
+      partitionSchema: StructType): Boolean = {
+    val resultSchema = StructType(readDataSchema.fields ++ partitionSchema.fields)
+    sqlConf.orcVectorizedReaderEnabled && sqlConf.wholeStageEnabled &&
+      !WholeStageCodegenExec.isTooManyFields(sqlConf, resultSchema) &&
+      resultSchema.forall(s => OrcUtils.supportColumnarReads(
+        s.dataType, sqlConf.orcVectorizedReaderNestedColumnEnabled))
   }
 }

@@ -159,6 +159,11 @@
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-session</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-http</artifactId>
       <scope>compile</scope>
     </dependency>
@@ -573,6 +578,12 @@
               <include>org.eclipse.jetty:jetty-security</include>
               <include>org.eclipse.jetty:jetty-util</include>
               <include>org.eclipse.jetty:jetty-server</include>
+              <include>org.eclipse.jetty:jetty-session</include>
+              <!-- Jetty EE10 artifacts for Jetty 12 -->
+              <include>org.eclipse.jetty.ee10:jetty-ee10-servlet</include>
+              <include>org.eclipse.jetty.ee10:jetty-ee10-servlets</include>
+              <include>org.eclipse.jetty.ee10:jetty-ee10-plus</include>
+              <include>org.eclipse.jetty.ee10:jetty-ee10-proxy</include>
               <include>com.google.guava:guava</include>
               <include>com.google.guava:failureaccess</include>
               <include>com.google.protobuf:*</include>

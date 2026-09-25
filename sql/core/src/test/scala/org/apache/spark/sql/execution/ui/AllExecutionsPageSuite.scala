@@ -19,7 +19,7 @@ package org.apache.spark.sql.execution.ui
 
 import java.util
 import java.util.{Locale, Properties}
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 
 import scala.xml.Node
 

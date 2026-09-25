@@ -159,7 +159,7 @@
          (ODP-7640-Spark351/355) and confirmed live to fix the same failure on spark333. -->
     <orc.version>1.9.5</orc.version>
     <orc.classifier>shaded-protobuf</orc.classifier>
-    <jetty.version>9.4.57.v20241219</jetty.version>
+    <jetty.version>10.0.19</jetty.version>
     <jakartaservlet.version>4.0.3</jakartaservlet.version>
     <chill.version>0.10.0</chill.version>
     <ivy.version>2.5.2</ivy.version>
@@ -548,12 +548,6 @@
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-http</artifactId>
-        <version>${jetty.version}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-continuation</artifactId>
         <version>${jetty.version}</version>
         <scope>provided</scope>
       </dependency>

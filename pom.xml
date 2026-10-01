@@ -159,8 +159,11 @@
          (ODP-7640-Spark351/355) and confirmed live to fix the same failure on spark333. -->
     <orc.version>1.9.5</orc.version>
     <orc.classifier>shaded-protobuf</orc.classifier>
-    <jetty.version>10.0.19</jetty.version>
-    <jakartaservlet.version>4.0.3</jakartaservlet.version>
+    <jetty.version>11.0.26</jetty.version>
+    <jakartaservlet.version>5.0.0</jakartaservlet.version>
+    <!-- SPARK-46938: Required by Hive / LibThrift libs -->
+    <javaxservlet.version>4.0.1</javaxservlet.version>
+    
     <chill.version>0.10.0</chill.version>
     <ivy.version>2.5.2</ivy.version>
     <oro.version>2.0.8</oro.version>
@@ -229,7 +232,7 @@
       Please don't upgrade the version to 3.0.0+,
       Because it transition Jakarta REST API from javax to jakarta package.
     -->
-    <jersey.version>2.40</jersey.version>
+    <jersey.version>3.0.12</jersey.version>
     <joda.version>2.12.5</joda.version>
     <jodd.version>3.5.2</jodd.version>
     <jsr305.version>3.0.0</jsr305.version>
@@ -2783,7 +2786,16 @@
         <artifactId>okio</artifactId>
         <version>1.17.6</version>
       </dependency>
-</dependencies>
+      <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${javaxservlet.version}</version>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
 
   <build>

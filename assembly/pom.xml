@@ -215,6 +215,20 @@
           <artifactId>spark-hive_${scala.binary.version}</artifactId>
           <version>${project.version}</version>
         </dependency>
+        <!-- The Hive 4.x metastore client (spark.sql.hive.metastore.version 4.x) needs
+             org.apache.hadoop.hdfs.protocol.SnapshotException (Warehouse.escapePathName), which is in hadoop-hdfs and
+             not in hadoop-client-api/-runtime. Ship only this jar, without its transitive dependencies. -->
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-hdfs</artifactId>
+          <version>${hadoop.version}</version>
+          <exclusions>
+            <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
       </dependencies>
     </profile>
     <profile>

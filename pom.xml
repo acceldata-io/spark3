@@ -226,7 +226,10 @@
     <jsr305.version>3.0.0</jsr305.version>
     <jaxb.version>2.2.11</jaxb.version>
     <libthrift.version>0.16.0</libthrift.version>
-    <antlr4.version>4.13.1</antlr4.version>
+    <!-- Keep at 4.9.3 (ATN v3), as in Apache Spark 3.5: Delta 3.3.x and Hudi 1.2.x ship SQL parsers generated
+         with 4.9.3 and run on Spark's antlr4-runtime; 4.10+ generates ATN v4 and fails them with
+         "Could not deserialize ATN with version 3 (expected 4)". -->
+    <antlr4.version>4.9.3</antlr4.version>
     <jpam.version>1.1</jpam.version>
     <selenium.version>4.9.1</selenium.version>
     <htmlunit-driver.version>4.9.1</htmlunit-driver.version>

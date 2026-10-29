@@ -34,8 +34,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.spark.internal.SparkLogger;
-import org.apache.spark.internal.SparkLoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // This class is copied from Hadoop 3.4.0
 // org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
@@ -47,7 +47,7 @@ import org.apache.spark.internal.SparkLoggerFactory;
 //  - PROXY_USER_COOKIE_NAME
 @Public
 public class AmIpFilter implements Filter {
-  private static final SparkLogger LOG = SparkLoggerFactory.getLogger(AmIpFilter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AmIpFilter.class);
 
   @Deprecated
   public static final String PROXY_HOST = "PROXY_HOST";

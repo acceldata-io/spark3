@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.EnumSet;
 
-import org.apache.spark.internal.SparkLogger;
-import org.apache.spark.internal.SparkLoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // Class containing general purpose proxy utilities
 //
@@ -39,7 +39,7 @@ import org.apache.spark.internal.SparkLoggerFactory;
 // Modification:
 // Migrate from javax.servlet to jakarta.servlet
 public class ProxyUtils {
-  private static final SparkLogger LOG = SparkLoggerFactory.getLogger(ProxyUtils.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ProxyUtils.class);
   public static final String E_HTTP_HTTPS_ONLY =
       "This filter only works for HTTP/HTTPS";
   public static final String LOCATION = "Location";

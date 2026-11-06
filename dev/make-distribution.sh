@@ -183,6 +183,31 @@ echo "Build flags: $@" >> "$DISTDIR/RELEASE"
 # Copy jars
 cp "$SPARK_HOME"/assembly/target/scala*/jars/* "$DISTDIR/jars/"
 
+# ODP-7651: native spark.sql cannot read Hive JSON-SerDe tables. Spark's built-in Hive 2.3 client
+# has no org.apache.hive.hcatalog.data.JsonSerDe, so the table resolves with an empty schema and
+# every query fails with UNRESOLVED_COLUMN. Ship hive-hcatalog-core matched to the bundled
+# hive-serde version (a Hive-4 hcatalog jar does not initialise under the 2.3 client). Being in
+# jars/, it also lands in the YARN archive the History Server builds, so executors get it too.
+HIVE_SERDE_JAR=$(ls "$DISTDIR"/jars/hive-serde-*.jar 2>/dev/null | head -1)
+if [ -n "$HIVE_SERDE_JAR" ]; then
+  HIVE23_VERSION=$(basename "$HIVE_SERDE_JAR" .jar | sed 's/^hive-serde-//')
+  HC_DIR=$(mktemp -d)
+  if "$MVN" -q -N org.apache.maven.plugins:maven-dependency-plugin:3.1.1:copy \
+       -Dartifact=org.apache.hive.hcatalog:hive-hcatalog-core:${HIVE23_VERSION} \
+       -DoutputDirectory="$HC_DIR" "$@" \
+     && [ -f "$HC_DIR/hive-hcatalog-core-${HIVE23_VERSION}.jar" ]; then
+    echo "ODP-7651: bundling hive-hcatalog-core-${HIVE23_VERSION} -> jars/"
+    cp "$HC_DIR/hive-hcatalog-core-${HIVE23_VERSION}.jar" "$DISTDIR/jars/"
+  else
+    echo "ODP-7651 FATAL: could not resolve org.apache.hive.hcatalog:hive-hcatalog-core:${HIVE23_VERSION}" >&2
+    echo "  The dist would ship without hive-hcatalog-core and native spark.sql" >&2
+    echo "  could not read Hive JSON-SerDe tables." >&2
+    rm -rf "$HC_DIR"
+    exit 1
+  fi
+  rm -rf "$HC_DIR"
+fi
+
 # Only create the yarn directory if the yarn artifacts were built.
 if [ -f "$SPARK_HOME"/common/network-yarn/target/scala*/spark-*-yarn-shuffle.jar ]; then
   mkdir "$DISTDIR/yarn"

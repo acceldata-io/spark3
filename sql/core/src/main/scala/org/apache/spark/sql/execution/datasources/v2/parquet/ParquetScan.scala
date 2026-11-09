@@ -25,7 +25,7 @@ import org.apache.parquet.hadoop.ParquetInputFormat
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.connector.expressions.aggregate.Aggregation
-import org.apache.spark.sql.connector.read.PartitionReaderFactory
+import org.apache.spark.sql.connector.read.{PartitionReaderFactory, Scan}
 import org.apache.spark.sql.execution.datasources.{AggregatePushDownUtils, PartitioningAwareFileIndex}
 import org.apache.spark.sql.execution.datasources.parquet.{ParquetOptions, ParquetReadSupport, ParquetWriteSupport}
 import org.apache.spark.sql.execution.datasources.v2.FileScanRuntimeFiltering
@@ -47,6 +47,18 @@ case class ParquetScan(
     pushedAggregate: Option[Aggregation] = None,
     staticPartitionFilters: Seq[Expression] = Seq.empty,
     dataFilters: Seq[Expression] = Seq.empty) extends FileScanRuntimeFiltering {
+
+  override def columnarSupportMode(): Scan.ColumnarSupportMode = {
+    val conf = sparkSession.sessionState.conf
+    if (!conf.getConf(SQLConf.V2_FILE_COLUMNAR_SUPPORT_WITHOUT_INPUT_PARTITIONS_ENABLED)) {
+      Scan.ColumnarSupportMode.PARTITION_DEFINED
+    } else if (ParquetPartitionReaderFactory.supportsColumnarReads(
+        conf, readDataSchema, readPartitionSchema)) {
+      Scan.ColumnarSupportMode.SUPPORTED
+    } else {
+      Scan.ColumnarSupportMode.UNSUPPORTED
+    }
+  }
 
   override def isSplitable(path: Path): Boolean = {
     // If aggregate is pushed down, only the file footer will be read once,

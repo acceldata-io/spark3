@@ -19,7 +19,6 @@ package org.apache.spark.sql.hive.thriftserver
 
 import java.io.File
 import java.sql.{DriverManager, ResultSet, Statement}
-import java.util
 
 import scala.concurrent.duration._
 import scala.jdk.CollectionConverters._
@@ -28,11 +27,9 @@ import scala.util.Try
 import org.apache.hadoop.hive.conf.HiveConf.ConfVars
 import org.apache.hadoop.hive.ql.metadata.Hive
 import org.apache.hadoop.hive.ql.session.SessionState
-import org.apache.hive.jdbc.HttpBasicAuthInterceptor
 import org.apache.hive.service.auth.PlainSaslHelper
 import org.apache.hive.service.cli.thrift.{ThriftBinaryCLIService, ThriftCLIService, ThriftCLIServiceClient}
 import org.apache.hive.service.rpc.thrift.TCLIService.Client
-import org.apache.http.impl.client.HttpClientBuilder
 import org.apache.thrift.protocol.TBinaryProtocol
 import org.apache.thrift.transport.{THttpClient, TSocket}
 
@@ -110,13 +107,13 @@ trait SharedThriftServer extends SharedSparkSession {
         val rawTransport = new TSocket("localhost", serverPort)
         PlainSaslHelper.getPlainTransport(username, "anonymous", rawTransport)
       case ServerMode.http =>
-        val interceptor = new HttpBasicAuthInterceptor(
-          username,
-          "anonymous",
-          null, null, true, new util.HashMap[String, String]())
-        new THttpClient(
-          s"http://localhost:$serverPort/cliservice",
-          HttpClientBuilder.create.addInterceptorFirst(interceptor).build())
+        // libthrift 0.24 THttpClient takes an HttpClient 5 client. The Hive JDBC
+        // interceptor is still HttpClient 4, so send the same Basic header directly.
+        val httpClient = new THttpClient(s"http://localhost:$serverPort/cliservice")
+        val token = java.util.Base64.getEncoder.encodeToString(
+          s"$username:anonymous".getBytes(java.nio.charset.StandardCharsets.UTF_8))
+        httpClient.setCustomHeader("Authorization", s"Basic $token")
+        httpClient
     }
 
     val protocol = new TBinaryProtocol(transport)

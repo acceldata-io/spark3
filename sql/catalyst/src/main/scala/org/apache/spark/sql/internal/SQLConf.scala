@@ -3098,6 +3098,16 @@ object SQLConf {
       .timeConf(TimeUnit.MILLISECONDS)
       .createWithDefault(100)
 
+  val V2_FILE_COLUMNAR_SUPPORT_WITHOUT_INPUT_PARTITIONS_ENABLED =
+    buildConf("spark.sql.files.v2.columnarSupportWithoutInputPartitions.enabled")
+      .internal()
+      .doc("When true, Parquet and ORC v2 scans decide columnar support from the read schema " +
+        "and configs, without planning input partitions. When false, the decision is made " +
+        "from the planned input partitions.")
+      .version("3.5.5")
+      .booleanConf
+      .createWithDefault(true)
+
   val USE_V1_SOURCE_LIST = buildConf("spark.sql.sources.useV1SourceList")
     .internal()
     .doc("A comma-separated list of data source short names or fully qualified data source " +

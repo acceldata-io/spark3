@@ -25,6 +25,7 @@ import org.apache.spark.sql.catalyst.plans.ExistenceJoin
 import org.apache.spark.sql.connector.catalog.{InMemoryTableCatalog, InMemoryTableWithV2FilterCatalog}
 import org.apache.spark.sql.connector.expressions.{FieldReference, LiteralValue}
 import org.apache.spark.sql.connector.expressions.filter.Predicate
+import org.apache.spark.sql.connector.read.Scan
 import org.apache.spark.sql.execution._
 import org.apache.spark.sql.execution.adaptive._
 import org.apache.spark.sql.execution.datasources.v2.{BatchScanExec, FileScanRuntimeFiltering}
@@ -1891,6 +1892,11 @@ abstract class DynamicPartitionPruningV2FileSourceSuite extends QueryTest
           checkAnswer(df, Row(3) :: Row(8) :: Nil)
 
           val scan = fileScanOf(df)
+          assert(scan.columnarSupportMode() == Scan.ColumnarSupportMode.SUPPORTED)
+          withSQLConf(
+              SQLConf.V2_FILE_COLUMNAR_SUPPORT_WITHOUT_INPUT_PARTITIONS_ENABLED.key -> "false") {
+            assert(scan.columnarSupportMode() == Scan.ColumnarSupportMode.PARTITION_DEFINED)
+          }
           assert(scan.partitionFilters.exists(_.isInstanceOf[InSet]))
           // Only the day=3 directory survives, out of the five that were written.
           assert(scan.fileIndex.listFiles(scan.partitionFilters, Nil).length == 1)
